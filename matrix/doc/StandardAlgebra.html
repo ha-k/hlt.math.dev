@@ -1,0 +1,222 @@
+<HTML>
+<HEAD>
+<TITLE>
+StandardAlgebra.html
+</TITLE>
+<LINK REL="STYLESHEET" TYPE="text/css" HREF="style.css">
+</HEAD>
+<BODY BGCOLOR="#CCCFF">
+<CENTER>
+<TABLE BGCOLOR=white WIDTH=50% BORDER=5 CELLPADDING=20>
+<TR><TD ALIGN=CENTER>
+<SPAN STYLE="FONT-SIZE:XX-LARGE"><TT><B>StandardAlgebra.java</B></TT></SPAN>
+<P>
+</TD></TR>
+</TABLE>
+</CENTER>
+<PRE>
+<SPAN STYLE="COLOR:#88AA66"><EM>// FILE. . . . . d:/hak/hlt/src/hlt/math/matrix/sources/StandardAlgebra.java
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// EDIT BY . . . Hassan Ait-Kaci
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// ON MACHINE. . Hak-Laptop
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// STARTED ON. . Tue Dec  3 17:40:58 2019
+</EM></SPAN>
+<SPAN STYLE="COLOR:BROWN"><STRONG>package</STRONG></SPAN> hlt.math.matrix;
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <a href="000StartHere.html"><tt>package hlt.math.matrix</tt>
+  documentation listing</a>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  This is a concrete subclass of <tt>NumberAlgebra</tt> redefining its
+  operations as those of standard arithmetic to be final methods:<p/>
+  <ul>
+  <li/><tt>zero()          </tt>&#8797;<tt>  0.0</tt>
+  <li/><tt>one()           </tt>&#8797;<tt>  1.0</tt>
+  <li/><tt>sum(x,y)        </tt>&#8797;<tt>  x+y</tt>
+  <li/><tt>product(x,y)    </tt>&#8797;<tt>  *</tt>
+  <li/><tt>negation(x)     </tt>&#8797;<tt>  -x</tt>
+  <li/><tt>difference(x,y) </tt>&#8797;<tt>  x-y</tt>
+  </ul>
+ 
+     
+       
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>See also:</STRONG></TD><TD>&nbsp;</TD>
+<TD><A HREF="NumberAlgebra.html">NumberAlgebra</A>, <A HREF="Matrix.html">Matrix</A>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Copyy:</STRONG></TD><TD>&nbsp;</TD>
+<TD>&copy; <a href="http://www.hassan-ait-kaci.net/">by the author</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Author:</STRONG></TD><TD>&nbsp;</TD>
+<TD><a href="mailto:hak@acm.org">Hassan A&iuml;t-Kaci</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Version:</STRONG></TD><TD>&nbsp;</TD>
+<TD>Last modified on Fri Dec 13 10:01:27 2019 by hak
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+<SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>StandardAlgebra</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>extends</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>zero</tt> of this algebra as <tt>0.0</tt>.  It
+    should always verify <tt>sum(x,zero())</tt> =
+    <tt>sum(zero(),x)</tt> = <tt>x</tt>, for any <tt>double</tt>
+    <tt>x</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> zero <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>one</tt> of this algebra as <tt>1.0</tt>.  It should
+    always verify <tt>product(x,one())</tt> = <tt>product(one(),x)</tt>
+    = <tt>x</tt>, for any <tt>double</tt>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> one <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>sum</tt> of the arguments as <tt>+</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> sum <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> x + y;	
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>product</tt> of the arguments as <tt>&times;</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> product <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> x * y;	
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>difference</tt> of the arguments as binary <tt>-</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> difference <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> x - y;	
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>negation</tt> of the argument as unary <tt>-</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> negation <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> -x;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Define a <tt>String</tt> form for this <tt>StandardAlgebra</tt>. It is
+    final so it cannot be redefined in any subclass.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> toString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#D2691E"><EM>"Standard Algebra"</EM></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+</PRE>
+<P>
+<HR>
+<P ALIGN="RIGHT"><SPAN STYLE="COLOR:#F07070"><EM>
+This file was generated on Wed Dec 18 03:37:41 PST 2019 from file <SPAN STYLE="COLOR:BROWN"><KBD>StandardAlgebra.java</KBD></SPAN><BR>by the <SPAN STYLE="COLOR:BROWN"><KBD>hlt.language.tools.Hilite</KBD></SPAN> Java tool written by <A HREF="http://hassan-ait-kaci.net">Hassan A&iuml;t-Kaci</A></EM></SPAN>
+<P>
+<HR>
+</BODY>
+</HTML>

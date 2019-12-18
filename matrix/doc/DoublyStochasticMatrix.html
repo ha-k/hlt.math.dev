@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<TITLE>
+DoublyStochasticMatrix.html
+</TITLE>
+<LINK REL="STYLESHEET" TYPE="text/css" HREF="style.css">
+</HEAD>
+<BODY BGCOLOR="#CCCFF">
+<CENTER>
+<TABLE BGCOLOR=white WIDTH=50% BORDER=5 CELLPADDING=20>
+<TR><TD ALIGN=CENTER>
+<SPAN STYLE="FONT-SIZE:XX-LARGE"><TT><B>DoublyStochasticMatrix.java</B></TT></SPAN>
+<P>
+</TD></TR>
+</TABLE>
+</CENTER>
+<PRE>
+<SPAN STYLE="COLOR:#88AA66"><EM>// FILE public. . . . . d:/hak/hlt/src/hlt/math/matrix/sources/DoublyStochasticMatrix.java
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// EDIT BY . . . Hassan Ait-Kaci
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// ON MACHINE. . Hak-Laptop
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// STARTED ON. . Fri Nov 15 18:10:36 2019
+</EM></SPAN>
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+       
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>Copyright:</STRONG></TD><TD>&nbsp;</TD>
+<TD>&copy; <a href="http://www.hassan-ait-kaci.net/">by the author</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Author:</STRONG></TD><TD>&nbsp;</TD>
+<TD><a href="mailto:hak@acm.org">Hassan A&iuml;t-Kaci</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Version:</STRONG></TD><TD>&nbsp;</TD>
+<TD>Last modified on Thu Dec 12 11:12:31 2019 by hak
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>package</STRONG></SPAN> hlt.math.matrix;
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <a href="000StartHere.html"><tt>package hlt.math.matrix</tt>
+  documentation listing</a>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  This defines the class <tt>DoublyStochasticMatrix</tt> as a subclass
+  of <tt>Matrix</tt> which has only non-negative entries, and
+  whose every row and column add up to <tt>1.0</tt> (and therefore,
+  this entails that all its entries must be in <tt>[0.0,1.0]</tt>).
+ 
+   
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>See also:</STRONG></TD><TD>&nbsp;</TD>
+<TD><A HREF="Matrix.html">Matrix</A>
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+<SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoublyStochasticMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>extends</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoublyStochasticMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;    
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoublyStochasticMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>order<SPAN STYLE="COLOR:#444444">)</SPAN>;    
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoublyStochasticMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    setData<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoublyStochasticMatrix</STRONG></SPAN> setData <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>!isDoublyStochastic<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN>
+	<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Non-doubly-stochastic data array may not be used for a DoublyStochasticMatrix"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN>.setData<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ******************************************************************** */</EM></SPAN>
+<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+</PRE>
+<P>
+<HR>
+<P ALIGN="RIGHT"><SPAN STYLE="COLOR:#F07070"><EM>
+This file was generated on Wed Dec 18 03:37:41 PST 2019 from file <SPAN STYLE="COLOR:BROWN"><KBD>DoublyStochasticMatrix.java</KBD></SPAN><BR>by the <SPAN STYLE="COLOR:BROWN"><KBD>hlt.language.tools.Hilite</KBD></SPAN> Java tool written by <A HREF="http://hassan-ait-kaci.net">Hassan A&iuml;t-Kaci</A></EM></SPAN>
+<P>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,7 @@
+A           { text-decoration: none }
+A:HOVER     { color: orange }
+A.SYMBOL    { color: #11AA55; text-decoration: none }
+A.INDEX     { text-decoration: none }
+
+TT          { white-space:pre; font-weight:bold; color: brown; font-size: 105% }
+PRE         { font-weight:bold; color: brown; font-size: 105% }

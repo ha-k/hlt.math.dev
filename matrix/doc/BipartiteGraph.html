@@ -1,0 +1,1503 @@
+<HTML>
+<HEAD>
+<TITLE>
+BipartiteGraph.html
+</TITLE>
+<LINK REL="STYLESHEET" TYPE="text/css" HREF="style.css">
+</HEAD>
+<BODY BGCOLOR="#CCCFF">
+<CENTER>
+<TABLE BGCOLOR=white WIDTH=50% BORDER=5 CELLPADDING=20>
+<TR><TD ALIGN=CENTER>
+<SPAN STYLE="FONT-SIZE:XX-LARGE"><TT><B>BipartiteGraph.java</B></TT></SPAN>
+<P>
+</TD></TR>
+</TABLE>
+</CENTER>
+<PRE>
+<SPAN STYLE="COLOR:#88AA66"><EM>// FILE. . . . . d:/hak/hlt/src/hlt/math/matrix/sources/BipartiteGraph.java
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// EDIT BY . . . Hassan Ait-Kaci
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// ON MACHINE. . Hak-Laptop
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// STARTED ON. . Fri Nov 22 14:01:20 2019
+</EM></SPAN>
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+       
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>Copyright:</STRONG></TD><TD>&nbsp;</TD>
+<TD>&copy; <a href="http://www.hassan-ait-kaci.net/">by the author</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Author:</STRONG></TD><TD>&nbsp;</TD>
+<TD><a href="mailto:hak@acm.org">Hassan A&iuml;t-Kaci</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Version:</STRONG></TD><TD>&nbsp;</TD>
+<TD>Last modified on Thu Dec 12 11:15:12 2019 by hak
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>package</STRONG></SPAN> hlt.math.matrix;
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <a href="000StartHere.html"><tt>package hlt.math.matrix</tt>
+  documentation listing</a>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> java.util.<SPAN STYLE="COLOR:#4400DD"><STRONG>Iterator</STRONG></SPAN>;
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.language.util.<SPAN STYLE="COLOR:#4400DD"><STRONG>ArrayList</STRONG></SPAN>;
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.language.util.<SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN>;
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.language.util.<SPAN STYLE="COLOR:#4400DD"><STRONG>IntIterator</STRONG></SPAN>;
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  This is a class representing a weighted bipartite graph with edges between
+  two sets of nodes of equal cardinality: left nodes and right nodes. It is
+  a subclass of <tt>Matrix</tt>, so using it can rely on its
+  <tt>Matrix</tt> and <tt>Matrix</tt> structure where its nodes
+  correspond to rows and columns and its edges correspond to non-zero
+  entries in its <tt>data</tt> array. More precisely, a left node is a row
+  and a right node is a column, and an edge exists between a left node and a
+  right node iff the corresponding entry in the data array is non-zero <i>at
+  edge-creation time</i>. Indeed, a <tt>BipartiteGraph</tt> is always
+  generated from its <i>defined</i> <tt>data</tt> array component. Hence, at
+  creation time, all its edges have a non-zero weight equal to the
+  corresponding entry in the <tt>data</tt> array. After it is created, a
+  <tt>BipartiteGraph</tt>'s graph structure does not change, but the weights
+  on its edges can change.  After creation time, modifying such an edge's
+  weight to any value (including zero) will modify the corresponding matrix
+  entry in the <tt>data</tt> array, and conversely, modifying any matrix
+  entry in the <tt>data</tt> array corresponding to an existing edge will
+  modify the weight on the edge. <b>N.B.:</b> Since a
+  <tt>BipartiteGraph</tt>'s graph structure is immutable after it is
+  created, setting an edge's weight to zero will not delete the edge.  This
+  is convenient for implementing many weight-based computation algorithms
+  (<i>e.g.</i> finding a matching, an augmenting path, <i>etc.</i>, ...).
+  
+  <p/>
+  
+  <a name="contents"><span style="font-family:arial,helvetica;">
+  <b>Contents</b> <small>(<a
+  href="000StartHere.html"><tt>package hlt.math.matrix</tt>
+  documentation listing</a>)</small> </span></a>
+ 
+  <ul>
+ 
+  <p/><li><a href="#constructors"><b><span style="font-family:arial,helvetica;">
+  Object Constructors
+  </span></b></a></li>
+ 
+  <p/><li><a href="#components"><b><span style="font-family:arial,helvetica;">
+  Object Components
+  </span></b></a></li>
+ 
+  <p/><li><a href="#methods"><b><span style="font-family:arial,helvetica;">
+  Object Methods
+  </span></b></a></li>
+ 
+  <p/>
+ 
+     <ul>
+ 
+      <li><a href="#nodesedges"><b><span style="font-family:arial,helvetica;">
+           Node/Edge Methods
+           </span></b></a></li>
+ 
+      <li><a href="#io"><b><span style="font-family:arial,helvetica;">
+           I/O Methods
+           </span></b></a></li>
+ 
+      <li><a href="#matchings"><b><span style="font-family:arial,helvetica;">
+           Methods for Matchings and Paths
+           </span></b></a></li>
+ 
+      <li><a href="#private"><b><span style="font-family:arial,helvetica;">
+           Local Private Methods
+           </span></b></a></li>
+ 
+     </ul>
+ 
+  <p/><li><a href="#static"><b><span style="font-family:arial,helvetica;">
+  Class Methods
+  </span></b></a></li>
+ 
+  <p/>
+ 
+     <ul>
+ 
+     <li><a href="#scomponents"><b><span style="font-family:arial,helvetica;">
+           Class Components
+           </span></b></a></li>
+ 
+     <li><a href="#smethods"><b><span style="font-family:arial,helvetica;">
+           Class Methods
+           </span></b></a></li>
+ 
+     </ul>
+ 
+  <p/><li><a href="#classes"><b><span style="font-family:arial,helvetica;">
+           Local Classes
+           </span></b></a></li>
+ 
+  <p/>
+ 
+     <ul>
+ 
+     <li><a href="#edge"><b><span style="font-family:arial,helvetica;">
+           Edge Class
+           </span></b></a></li>
+ 
+     <li><a href="#matching"><b><span style="font-family:arial,helvetica;">
+           Matching Class
+           </span></b></a></li>
+ 
+     </ul>
+  </ul>
+ 
+     
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>See also:</STRONG></TD><TD>&nbsp;</TD>
+<TD><A HREF="Matrix.html">Matrix</A>, <A HREF="Matrix.html">Matrix</A>
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+<SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>BipartiteGraph</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>extends</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h3 align="center"><span style="font-family:arial,helvetica;">
+    <a name="constructors" href="#contents">Object Constructors</a>
+    </span></h3>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a <tt>BipartiteGraph</tt> with the given <tt>data</tt>
+    array. This ensures that the data array is defined and square (violation
+    of either condition causes a runtime exception to be thrown).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>BipartiteGraph</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    setData<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    initializeGraphComponents<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h3 align="center"><span style="font-family:arial,helvetica;">
+    <a name="components" href="#contents">Object Components</a>
+    </span></h3>
+   
+    In addition to the components it inherits form its <a
+    href="./Matrix.html"><tt>Matrix</tt></a> superclass, a
+    <tt>BipartiteGraph</tt> has one specific additional component which
+    is a <tt>boolean[][]</tt> array. It also keeps handy information in
+    node-indexed arrays.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is a square array of <tt>boolean</tt>s having the same sign pattern
+    as the data array at graph creation time.  It serves as a mask on the
+    <tt>data</tt> array of this <tt>BipartiteGraph</tt> to identify which
+    entries in its <tt>data</tt> array are its edges. Hence, it is immutable
+    once created.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> isEdge;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is an array of <tt>IntArrayList</tt>s containing the lists of
+    successors of left nodes.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> succLists;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is an array of right node indices, each of which is the first
+    successor of a left node, or <tt>-1</tt> if a left node has no
+    successor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> firstSuccs;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is an array of right node indices, each of which is the last
+    successor of a left node, or <tt>-1</tt> if a left node has no
+    successor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> lastSuccs;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is an array of <tt>IntArrayList</tt>s containing the lists of
+    predecessors of right nodes.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> predLists;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is an array of left node indices, each of which is the first
+    predecessor of a right node, or <tt>-1</tt> if a right node has no
+    predecessor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> firstPreds;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is an array of left node indices, each of which is the last
+    predecessor of a right node, or <tt>-1</tt> if a right node has no
+    predecessor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> lastPreds;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+   Contains the number of successors of each left node.
+  
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> numOfSuccs;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+   Contains the number of predecessors of each right node.
+  
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> numOfPreds;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h3 align="center"><span style="font-family:arial,helvetica;">
+    <a name="methods" href="#contents">Object Methods</a>
+    </span></h3>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="nodesedges" href="#contents">Node/Edge Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff there is an edge in this
+    <tt>BipartiteGraph</tt> between <tt>left</tt> node and <tt>right</tt>
+    node.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isEdge <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> isEdge<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff there is an edge in this
+    <tt>BipartiteGraph</tt> between <tt>right</tt> node and <tt>left</tt>
+    node.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isDualEdge <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> isEdge<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the number of successors of the given <tt>left</tt> node.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> numOfSuccessors <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> numOfSuccs<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the number of predecessors of the given <tt>right</tt> node.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> numOfPredecessors <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> numOfPreds<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the right node index of the first successor of the given
+    <tt>left</tt> node, or <tt>-1</tt> if it has no successor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> firstSuccessor <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> firstSuccs<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the right node index of the last successor of the given
+    <tt>left</tt> node, or <tt>-1</tt> if it has no successor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> lastSuccessor <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> lastSuccs<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the left node index of the first predecessor of the given
+    <tt>right</tt> node, or <tt>-1</tt> if it has no predecessor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> firstPredecessor <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> firstPreds<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the left node index of the last predecessor of the given
+    <tt>right</tt> node, or <tt>-1</tt> if it has no predecessor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> lastPredecessor <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> lastPreds<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="io" href="#contents">I/O Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Print this <tt>BipartiteGraph</tt> as a matrix to standard output
+    printing each <tt>double</tt> entry formatted using the current <a
+    href="./Matrix.html#floatFormat"><tt>floatFormatString()</tt> value</a>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> show <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    jot<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"\t"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// tab space over the row numbers
+</EM></SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      jot<SPAN STYLE="COLOR:#444444">(</SPAN>centerColumnHeader<SPAN STYLE="COLOR:#444444">(</SPAN>headerString<SPAN STYLE="COLOR:#444444">(</SPAN>col+<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// column number (counted from 1)
+</EM></SPAN>
+    ln<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">2</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	jot<SPAN STYLE="COLOR:#444444">(</SPAN>headerString<SPAN STYLE="COLOR:#444444">(</SPAN>row+<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>+<SPAN STYLE="COLOR:#D2691E"><EM>"\t"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// row number (counted from 1)
+</EM></SPAN>	
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>isEdge<SPAN STYLE="COLOR:#444444">(</SPAN>row,col<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.out.printf<SPAN STYLE="COLOR:#444444">(</SPAN>floatFormatString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>,data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>else</STRONG></SPAN>
+	    jot<SPAN STYLE="COLOR:#444444">(</SPAN>noEdgeString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	ln<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Print this <tt>BipartiteGraph</tt>'s components to standard output.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> showComponents <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order = rows;
+
+    sln<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Showing the successors of each left node:"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; left &lt; order; left++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"\t"</EM></SPAN>+<SPAN STYLE="COLOR:#444444">(</SPAN>left+<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>+<SPAN STYLE="COLOR:#D2691E"><EM>": "</EM></SPAN> + numOfSuccs<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>+<SPAN STYLE="COLOR:#D2691E"><EM>" succs. = "</EM></SPAN>+succSetString<SPAN STYLE="COLOR:#444444">(</SPAN>left<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    ln<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    sln<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Showing the predecessors of each right node:"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; right &lt; order; right++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"\t"</EM></SPAN>+<SPAN STYLE="COLOR:#444444">(</SPAN>right+<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>+<SPAN STYLE="COLOR:#D2691E"><EM>": "</EM></SPAN> + numOfPreds<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>+<SPAN STYLE="COLOR:#D2691E"><EM>" preds. = "</EM></SPAN>+predSetString<SPAN STYLE="COLOR:#444444">(</SPAN>right<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Returns a <tt>String</tt> form of the successor set of the given
+    <tt>left</tt> node.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> succSetString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN> buf = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    buf.append<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>'{'</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>IntIterator</STRONG></SPAN> it = succsIterator<SPAN STYLE="COLOR:#444444">(</SPAN>left<SPAN STYLE="COLOR:#444444">)</SPAN>; it.hasNext<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	buf.append<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Integer</STRONG></SPAN>.toString<SPAN STYLE="COLOR:#444444">(</SPAN>it.next<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>+<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>it.hasNext<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  buf.append<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>','</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> buf.append<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>'}'</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.toString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Returns a <tt>String</tt> form of the predecessor set of the given
+    <tt>right</tt> node.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> predSetString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN> buf = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    buf.append<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>'{'</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>IntIterator</STRONG></SPAN> it = predsIterator<SPAN STYLE="COLOR:#444444">(</SPAN>right<SPAN STYLE="COLOR:#444444">)</SPAN>; it.hasNext<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	buf.append<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Integer</STRONG></SPAN>.toString<SPAN STYLE="COLOR:#444444">(</SPAN>it.next<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>+<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>it.hasNext<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  buf.append<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>','</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> buf.append<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>'}'</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.toString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="matchings" href="#contents">Methods for Matchings and Paths</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    A bipartite graph <tt>B</tt> of order <tt>n</tt> is a triple
+    (<tt>Lefts</tt>, <tt>Rights</tt>, <tt>Edges</tt>) where <tt>Lefts</tt>
+    and <tt>Right</tt> are two distinct sets of <i>nodes</i> of equal size
+    <tt>n</tt>, and <tt>Edges</tt> is a set of <i>edges</i>.
+   
+    <p/>
+   
+    A node is indexed by its position in <tt>{1,...,n}</tt> and is denoted
+    by its index.
+   
+    <p/>
+   
+    An <i>edge</i> <tt>(left,right)</tt> &isin; <tt>{1,...,n}</tt> &times;
+    <tt>{1,...,n}</tt> of this bipartite graph is a pair of left/right node
+    indices.
+   
+    <p/>
+   
+    A <i>matching</i> <tt>M</tt> of this bipartite graph is a set of pairs
+    of left/right node indices (for us, an <tt>ArrayList</tt> of
+    <tt>Edge</tt> objects) such that no two pairs share a node (<i>i.e.</i>,
+    the degree of all nodes in <tt>M</tt> is either <tt>0</tt> or <tt>1</tt>).
+   
+    <p/>
+   
+    A node of this bipartite graph will be said to be <i>used</i> by  a
+    matching <tt>M</tt> if it appears as the left or right node of an edge
+    in <tt>M</tt> (<i>i.e.</i>, if it has degree <tt>1</tt> in <tt>M</tt>).
+   
+    <p/>
+   
+    An <i>alternating path</i> of this bipartite graph with respect to a
+    matching <tt>M</tt> is a set of pairs of left/right node indices (for
+    us, an <tt>ArrayList</tt> of <tt>Edge</tt>s) such that no pair share a
+    node.
+   
+    <p/>
+   
+    A <i>path</i> of this bipartite graph is a sequence of such
+    <i>directed</i> <tt>Edge</tt>s starting at left node where the right
+    node of an edge is the left node of the following
+   
+    <p/>
+   
+   
+    Algorithm for finding a maximum bipartite-graph matching:
+   
+    <ul>
+   
+    <li>Start with empty matching <tt>M</tt>  </li>
+   
+    <li></li>
+   
+    <li></li>
+   
+    </ul>
+   
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="private" href="#contents">Local Private Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the right node that is the first successor of <tt>left</tt> node,
+    or <tt>-1</tt> if <tt>left</tt> has no successor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> getFirstSucc <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>succLists<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>.isEmpty<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> -<SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> succLists<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>.firstElement<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the right node that is the last successor of <tt>left</tt> node,
+    or <tt>-1</tt> if <tt>left</tt> has no successor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> getLastSucc <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>succLists<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>.isEmpty<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> -<SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> succLists<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>.lastElement<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the right node that is the first predecessor of <tt>right</tt>
+    node, or <tt>-1</tt> if <tt>right</tt> has no predecessor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> getFirstPred <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>predLists<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>.isEmpty<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> -<SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> predLists<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>.firstElement<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the right node that is the last predecessor of <tt>right</tt>
+    node, or <tt>-1</tt> if <tt>right</tt> has no predecessor.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> getLastPred <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>predLists<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>.isEmpty<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> -<SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> predLists<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>.lastElement<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Initialize the <tt>isEdge</tt> array and successor/predecessor arrays of
+    this <tt>BipartiteGraph</tt> at creation time, setting an entry to
+    <tt>true</tt> iff the corresponding edge exists (<i>i.e.</i>, iff the
+    entry in the <tt>data</tt> array is non-zero at creation time).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> initializeGraphComponents <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order = rows;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// create the isEdge array
+</EM></SPAN>    isEdge = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// create the arrays containing the numbers of successors/predecessors
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// for each left/right node.
+</EM></SPAN>    numOfSuccs = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    numOfPreds = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// initialize isEdge, succLists, and numOfSuccs
+</EM></SPAN>    succLists = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// an array of lists of successor indices
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; left &lt; order; left++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	succLists<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN> = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; right &lt; order; right++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>isEdge<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN> = <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN> != <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	      <SPAN STYLE="COLOR:#444444">{</SPAN>
+		succLists<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>.add<SPAN STYLE="COLOR:#444444">(</SPAN>right<SPAN STYLE="COLOR:#444444">)</SPAN>;
+		numOfSuccs<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>++;
+	      <SPAN STYLE="COLOR:#444444">}</SPAN>
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println("&gt;&gt;&gt; Succ Lists:");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// for (int left = 0; left &lt; order; left++)
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>//   {
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// 	System.err.print("&gt;&gt;&gt;\t"+(left+1)+":");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// 	for (IntIterator it = succsIterator(left); it.hasNext();)
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// 	  System.err.print(" "+(it.next()+1));
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// 	System.err.println();
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>//   }
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// initialize predLists and numOfPreds
+</EM></SPAN>    predLists = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// an array of lists of predecessor indices
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; right &lt; order; right++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	predLists<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN> = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; left &lt; order; left++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>isEdge<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	      <SPAN STYLE="COLOR:#444444">{</SPAN>
+		predLists<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>.add<SPAN STYLE="COLOR:#444444">(</SPAN>left<SPAN STYLE="COLOR:#444444">)</SPAN>;
+		numOfPreds<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>++;
+	      <SPAN STYLE="COLOR:#444444">}</SPAN>
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println("&gt;&gt;&gt; Pred Lists:");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// for (int right = 0; right &lt; order; right++)
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>//   {
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// 	System.err.print("&gt;&gt;&gt;\t"+(right+1)+":");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// 	for (IntIterator it = predsIterator(right); it.hasNext();)
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// 	  System.err.print(" "+(it.next()+1));
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// 	System.err.println();
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>//   }
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// create and initialize the array containing the first-successor right
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// node of each left node
+</EM></SPAN>    firstSuccs = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; left &lt; order; left++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      firstSuccs<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN> = getFirstSucc<SPAN STYLE="COLOR:#444444">(</SPAN>left<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.print("firstSuccs:");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// for (int i = 0; i &lt; order; i++)
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>//   System.err.print(" "+(firstSuccs[i]+1));
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println();
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// create and initialize the array containing the last-successor right
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// node of each left node
+</EM></SPAN>    lastSuccs = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; left &lt; order; left++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      lastSuccs<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN> = getFirstSucc<SPAN STYLE="COLOR:#444444">(</SPAN>left<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.print("lastSuccs: ");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// for (int i = 0; i &lt; order; i++)
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>//   System.err.print(" "+(lastSuccs[i]+1));
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println();
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// create and initialize the array containing the first-predecessor left
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// node of each right node
+</EM></SPAN>    firstPreds = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; right &lt; order; right++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      firstPreds<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN> = getFirstPred<SPAN STYLE="COLOR:#444444">(</SPAN>right<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.print("firstPreds:");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// for (int i = 0; i &lt; order; i++)
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>//   System.err.print(" "+(firstPreds[i]+1));
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println();
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// create and initialize the array containing the last-predecessor left
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// node of each right node
+</EM></SPAN>    lastPreds = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; right &lt; order; right++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      lastPreds<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN> = getLastPred<SPAN STYLE="COLOR:#444444">(</SPAN>right<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.print("lastPreds: ");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// for (int i = 0; i &lt; order; i++)
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>//   System.err.print(" "+(lastPreds[i]+1));
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println();
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// showComponents();
+</EM></SPAN>  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return an <tt>IntIterator</tt> for the list of successors of
+    <tt>left</tt> node.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntIterator</STRONG></SPAN> succsIterator <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> succLists<SPAN STYLE="COLOR:#444444">[</SPAN>left<SPAN STYLE="COLOR:#444444">]</SPAN>.iterator<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return an <tt>IntIterator</tt> for the list of predecessors of
+    <tt>right</tt> node.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntIterator</STRONG></SPAN> predsIterator <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> predLists<SPAN STYLE="COLOR:#444444">[</SPAN>right<SPAN STYLE="COLOR:#444444">]</SPAN>.iterator<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a <tt>String</tt> equal to the square-bracketed row/column
+    <tt>index</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> headerString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> index<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#D2691E"><EM>"["</EM></SPAN>+index+<SPAN STYLE="COLOR:#D2691E"><EM>"]"</EM></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a <tt>String</tt> to serve as well-centered column header
+    given a column-header <tt>String</tt> <tt>header</tt>, centering
+    the bracketed column index according to the current
+    <tt>printWidth()</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> centerColumnHeader <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> header<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> headerWidth = header.length<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> beforeWidth = <SPAN STYLE="COLOR:#444444">(</SPAN>printWidth<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> - headerWidth<SPAN STYLE="COLOR:#444444">)</SPAN> / <SPAN STYLE="COLOR:#33AA33">2</SPAN> + <SPAN STYLE="COLOR:#33AA33">2</SPAN>;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> afterWidth  = printWidth<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> - beforeWidth - headerWidth - <SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+
+    <SPAN STYLE="COLOR:BLUE"><STRONG>char</STRONG></SPAN> spaceChar = <SPAN STYLE="COLOR:#D2691E"><EM>' '</EM></SPAN>;
+
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN> centeredHeader = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>spaceChar<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; beforeWidth; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      centeredHeader.append<SPAN STYLE="COLOR:#444444">(</SPAN>spaceChar<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    centeredHeader.append<SPAN STYLE="COLOR:#444444">(</SPAN>header<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; afterWidth; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      centeredHeader.append<SPAN STYLE="COLOR:#444444">(</SPAN>spaceChar<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> centeredHeader.append<SPAN STYLE="COLOR:#444444">(</SPAN>spaceChar<SPAN STYLE="COLOR:#444444">)</SPAN>.toString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is the character used for showing no edge; defaults to the space
+    char.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>char</STRONG></SPAN> noEdgeChar = <SPAN STYLE="COLOR:#D2691E"><EM>' '</EM></SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a <tt>String</tt> of <tt>noEdgeChar</tt>s fitting the
+    floating-point print width to indicate that there is no edge.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> noEdgeString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN> str = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; printWidth<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      str.append<SPAN STYLE="COLOR:#444444">(</SPAN>noEdgeChar<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> str.toString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h3 align="center"><span style="font-family:arial,helvetica;">
+    <a name="static" href="#contents">Class Components and Methods</a>
+    </span></h3>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="scomponents" href="#contents">Class Components</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This <tt>BipartiteGraph</tt> list of edges.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>ArrayList</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Edges</STRONG></SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="smethods" href="#contents">Class Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+
+<SPAN STYLE="COLOR:#444444">}</SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// end BipartiteGraph class
+</EM></SPAN>
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <h3 align="center"><span style="font-family:arial,helvetica;">
+  <a name="classes" href="#contents">Local Classes</a>
+  </span></h3>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <h4 align="center"><span style="font-family:arial,helvetica;">
+  <a name="edge" href="#contents">Edge Class</a>
+  </span></h4>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  A local class representing a (<tt>left</tt>,<tt>right</tt>) edge between a
+  left node of index <tt>left</tt>, and a right node of index <tt>right</tt>.
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+<SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left;
+  <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right;
+
+  <SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.left  = left;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.right = right;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> startsWith <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> left<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.left == left;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> endsWith <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> right<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.right == right;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isFollowedBy <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN> next<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> right == next.left;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> equal <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Object</STRONG></SPAN> other<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>!<SPAN STYLE="COLOR:#444444">(</SPAN>other <SPAN STYLE="COLOR:BROWN"><STRONG>instanceof</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>left == <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>other<SPAN STYLE="COLOR:#444444">)</SPAN>.left<SPAN STYLE="COLOR:#444444">)</SPAN> &amp;&amp; <SPAN STYLE="COLOR:#444444">(</SPAN>right == <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>other<SPAN STYLE="COLOR:#444444">)</SPAN>.right<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> toString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#D2691E"><EM>"("</EM></SPAN>+left+<SPAN STYLE="COLOR:#D2691E"><EM>","</EM></SPAN>+right+<SPAN STYLE="COLOR:#D2691E"><EM>")"</EM></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+<SPAN STYLE="COLOR:#444444">}</SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// end Edge class
+</EM></SPAN>
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <h4 align="center"><span style="font-family:arial,helvetica;">
+  <a name="matching" href="#contents">Matching Class</a>
+  </span></h4>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  A local class representing a matching of a <tt>BipartiteGraph</tt>.
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+<SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matching</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  <SPAN STYLE="COLOR:#4400DD"><STRONG>ArrayList</STRONG></SPAN> matching = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>ArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+  <SPAN STYLE="COLOR:#4400DD"><STRONG>BipartiteGraph</STRONG></SPAN> graph;
+
+  <SPAN STYLE="COLOR:#4400DD"><STRONG>Matching</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>BipartiteGraph</STRONG></SPAN> graph<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.graph = graph;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this <tt>Matching</tt> is maximum for its
+    <tt>BipartiteGraph</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isMaximum <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> matching.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> == graph.rows<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this <tt>Matching</tt> uses the given
+    <tt>edge</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> uses <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN> edge<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> uses<SPAN STYLE="COLOR:#444444">(</SPAN>edge.left<SPAN STYLE="COLOR:#444444">)</SPAN> || uses<SPAN STYLE="COLOR:#444444">(</SPAN>edge.right<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this <tt>Matching</tt> uses the given
+    <tt>node</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> uses <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> node<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> degree<SPAN STYLE="COLOR:#444444">(</SPAN>node<SPAN STYLE="COLOR:#444444">)</SPAN> == <SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the degree of the given <tt>node</tt> in this
+    <tt>Matching</tt>. This is the number of <tt>Edge</tt> objects in this
+    <tt>Matching</tt> for which the given <tt>node</tt> is a <tt>left</tt>
+    or <tt>right</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> degree <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> node<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> degree = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+    
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Iterator</STRONG></SPAN> it = matching.iterator<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; it.hasNext<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN> edge = <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>it.next<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>edge.left == node || edge.right == node<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  degree++;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> degree;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:#4400DD"><STRONG>Matching</STRONG></SPAN> add <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Edge</STRONG></SPAN> edge<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> equal <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Object</STRONG></SPAN> other<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>!<SPAN STYLE="COLOR:#444444">(</SPAN>other <SPAN STYLE="COLOR:BROWN"><STRONG>instanceof</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matching</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// TO FINISH
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> toString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN> buf = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>StringBuilder</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    
+    <SPAN STYLE="COLOR:#88AA66"><EM>// TO FINISH
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#D2691E"><EM>"{"</EM></SPAN>+buf+<SPAN STYLE="COLOR:#D2691E"><EM>"}"</EM></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  
+<SPAN STYLE="COLOR:#444444">}</SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// end Matching class
+</EM></SPAN>
+</PRE>
+<P>
+<HR>
+<P ALIGN="RIGHT"><SPAN STYLE="COLOR:#F07070"><EM>
+This file was generated on Wed Dec 18 03:37:41 PST 2019 from file <SPAN STYLE="COLOR:BROWN"><KBD>BipartiteGraph.java</KBD></SPAN><BR>by the <SPAN STYLE="COLOR:BROWN"><KBD>hlt.language.tools.Hilite</KBD></SPAN> Java tool written by <A HREF="http://hassan-ait-kaci.net">Hassan A&iuml;t-Kaci</A></EM></SPAN>
+<P>
+<HR>
+</BODY>
+</HTML>

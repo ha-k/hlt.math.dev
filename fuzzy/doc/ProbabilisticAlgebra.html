@@ -1,0 +1,156 @@
+<HTML>
+<HEAD>
+<TITLE>
+ProbabilisticAlgebra.html
+</TITLE>
+<LINK REL="STYLESHEET" TYPE="text/css" HREF="style.css">
+</HEAD>
+<BODY BGCOLOR="#CCCFF">
+<CENTER>
+<TABLE BGCOLOR=white WIDTH=50% BORDER=5 CELLPADDING=20>
+<TR><TD ALIGN=CENTER>
+<SPAN STYLE="FONT-SIZE:XX-LARGE"><TT><B>ProbabilisticAlgebra.java</B></TT></SPAN>
+<P>
+</TD></TR>
+</TABLE>
+</CENTER>
+<PRE>
+<SPAN STYLE="COLOR:#88AA66"><EM>// FILE. . . . . d:/hak/hlt/src/hlt/math/fuzzy/ProbabilisticAlgebra.java
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// EDIT BY . . . Hassan Ait-Kaci
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// ON MACHINE. . Hp-Zbook
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// STARTED ON. . Sun May  6 08:23:47 2018
+</EM></SPAN>
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+       
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>Copyright:</STRONG></TD><TD>&nbsp;</TD>
+<TD>&copy; <a href="http://www.hassan-ait-kaci.net/">by the author</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Author:</STRONG></TD><TD>&nbsp;</TD>
+<TD><a href="mailto:hak@acm.org">Hassan A&iuml;t-Kaci</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Version:</STRONG></TD><TD>&nbsp;</TD>
+<TD>Last modified on Sun Dec 15 11:34:00 2019 by hak
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>package</STRONG></SPAN> hlt.math.fuzzy;
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <a href="000StartHere.html"><tt>package hlt.math.fuzzy</tt>
+  package documentation listing</a>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  This defines the class <tt>ProbabilisticAlgebra</tt> as:
+ 
+  <ul>
+  <li/><tt>sum(x,y)     </tt>&#8797;<tt> x+y-x*y</tt>
+  <li/><tt>product(x,y) </tt>&#8797;<tt> x*y</tt>
+  </ul>
+ 
+     
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>See also:</STRONG></TD><TD>&nbsp;</TD>
+<TD><A HREF="FuzzyAlgebra.html">FuzzyAlgebra</A>, <A HREF="FuzzyMatrix.html">FuzzyMatrix</A>
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+<SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>ProbabilisticAlgebra</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>extends</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyAlgebra</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a <tt>String</tt> form for this
+    <tt>ProbabilisticAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> toString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#D2691E"><EM>"Probabilistic Fuzzy Algebra"</EM></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Define <tt>sum</tt> for this <tt>ProbabilisticAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> sum <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> x+y - x*y;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Define <tt>product</tt> for this <tt>ProbabilisticAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> product <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> x*y;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+</PRE>
+<P>
+<HR>
+<P ALIGN="RIGHT"><SPAN STYLE="COLOR:#F07070"><EM>
+This file was generated on Wed Dec 18 03:38:08 PST 2019 from file <SPAN STYLE="COLOR:BROWN"><KBD>ProbabilisticAlgebra.java</KBD></SPAN><BR>by the <SPAN STYLE="COLOR:BROWN"><KBD>hlt.language.tools.Hilite</KBD></SPAN> Java tool written by <A HREF="http://hassan-ait-kaci.net">Hassan A&iuml;t-Kaci</A></EM></SPAN>
+<P>
+<HR>
+</BODY>
+</HTML>

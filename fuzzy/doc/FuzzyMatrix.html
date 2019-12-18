@@ -1,0 +1,1326 @@
+<HTML>
+<HEAD>
+<TITLE>
+FuzzyMatrix.html
+</TITLE>
+<LINK REL="STYLESHEET" TYPE="text/css" HREF="style.css">
+</HEAD>
+<BODY BGCOLOR="#CCCFF">
+<CENTER>
+<TABLE BGCOLOR=white WIDTH=50% BORDER=5 CELLPADDING=20>
+<TR><TD ALIGN=CENTER>
+<SPAN STYLE="FONT-SIZE:XX-LARGE"><TT><B>FuzzyMatrix.java</B></TT></SPAN>
+<P>
+</TD></TR>
+</TABLE>
+</CENTER>
+<PRE>
+<SPAN STYLE="COLOR:#88AA66"><EM>// FILE. . . . . d:/hak/hlt/src/hlt/math/fuzzy/FuzzyMatrix.java
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// EDIT BY . . . Hassan Ait-Kaci
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// ON MACHINE. . Hp-Zbook
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// STARTED ON. . Wed Mar 21 11:24:34 2018
+</EM></SPAN>
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+       
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>Copyright:</STRONG></TD><TD>&nbsp;</TD>
+<TD>&copy; <a href="http://www.hassan-ait-kaci.net/">by the author</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Author:</STRONG></TD><TD>&nbsp;</TD>
+<TD><a href="mailto:hak@acm.org">Hassan A&iuml;t-Kaci</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Version:</STRONG></TD><TD>&nbsp;</TD>
+<TD>Last modified on Tue Dec 17 16:25:23 2019 by hak
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>package</STRONG></SPAN> hlt.math.fuzzy;
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <a href="000StartHere.html"><tt>package hlt.math.fuzzy</tt>
+  package documentation listing</a>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.language.tools.<SPAN STYLE="COLOR:#4400DD"><STRONG>Debug</STRONG></SPAN>;
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.math.matrix.<SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN>;
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.math.matrix.<SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>;
+<SPAN STYLE="COLOR:#88AA66"><EM>// for the set of fuzzy degrees used by this fuzzy matrix (see end of file):
+</EM></SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.language.util.<SPAN STYLE="COLOR:#4400DD"><STRONG>DoubleArrayList</STRONG></SPAN>;
+<SPAN STYLE="COLOR:#88AA66"><EM>// for the set of matrix indices representing similarity classes:
+</EM></SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.language.util.<SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN>;
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  This is a generic class defining linear algebra operations on
+  matrices of fuzzy degrees in <tt>[0.0,1.0]</tt> in terms of its two
+  redefinable binary fuzzy operations on <tt>[0.0,1.0]</tt>: the
+  additive law <tt>sum</tt> and the multiplicative law
+  <tt>product</tt>. If not overridden, the default implementations for
+  <tt>sum</tt> and <tt>product</tt> are respectively <tt>Math.max</tt>
+  and <tt>Math.min</tt>.
+ 
+  <p/>
+ 
+  <span style="font-family:arial,helvetica;">
+  <a name="contents"><b>Contents</b></a> <small>(<a href="../matrix/000StartHere.html"><tt>package hlt.math.matrix</tt> package documentation listing</a>)</small> 
+  <ul>
+  <li><a href="#constructors">Object Constructors</a></li>
+  <p/>
+  <li><a href="#components">Object Components</a></li>
+  <p/>
+  <li><a href="#objectmethods">Object Methods</a></li>
+      <ul>
+      <li><a href="#setget">Component-Setter/Getter Methods</a></li>
+      <li><a href="#closure">Fuzzy Matrix-Closure Methods</a></li>
+      <li><a href="#misc">Miscellaneous Object Methods</a></li>
+      </ul>
+  <p/>
+  <li><a href="#classmethods">Class Components and Methods</a></li>
+  </ul>
+  </span>
+ 
+       
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>See also:</STRONG></TD><TD>&nbsp;</TD>
+<TD><A HREF="../matrix/Matrix.html">/matrix/Matrix</A>, <A HREF="../matrix/NumberAlgebra.html">/matrix/NumberAlgebra</A>, <A HREF="FuzzyAlgebra.html">FuzzyAlgebra</A>
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>extends</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="constructors" href="#contents">Object Constructors</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create a new <tt>FuzzyMatrix</tt> using the default
+    <tt>NumberAlgebra</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#88AA66"><EM>//    FuzzyAlgebra.setDefaultAlgebra();
+</EM></SPAN>  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create a new <tt>FuzzyMatrix</tt> using the specified
+    <tt>NumberAlgebra</tt> as the fuzzy operations.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN> algebra<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.setCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN>algebra<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a <tt>FuzzyMatrix</tt> of order <tt>order</tt> with all
+    entries <tt>0.0</tt>'s.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>order<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#88AA66"><EM>//    FuzzyAlgebra.setDefaultAlgebra();
+</EM></SPAN>  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create a new fuzzy matrix with a new <tt>rows</tt>-by-<tt>cols</tt>
+    data array of <tt>0.0</tt>'s.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#88AA66"><EM>//    FuzzyAlgebra.setDefaultAlgebra();
+</EM></SPAN>  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create a new <tt>FuzzyMatrix</tt> sharing the given array
+    <tt>data</tt> of <tt>double</tt>s in <tt>[0.0,0.1]</tt> (trusting
+    them to be so).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>data,!<SPAN STYLE="COLOR:GREEN">COPY</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#88AA66"><EM>//    FuzzyAlgebra.setDefaultAlgebra();
+</EM></SPAN>  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    If the flag <tt>copy</tt> is <tt>false</tt>, create a fuzzy matrix
+    sharing the given data array; otherwise, create a fuzzy matrix with
+    a new copy of the data array, in which case it also verifies that
+    all the <tt>double</tt> degrees in <tt>data</tt> are indeed in the
+    continuous interval <tt>[0.0,0.1]</tt>.
+    
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data, <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> copy<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    rows = data.length;
+    cols = data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>copy<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.data = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rows<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>cols<SPAN STYLE="COLOR:#444444">]</SPAN>;
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; rows; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; j &lt; cols; j++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN> = <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyTools</STRONG></SPAN>.checkFuzzyValue<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>else</STRONG></SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.data = data;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>//    FuzzyAlgebra.setDefaultAlgebra();
+</EM></SPAN>  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a new <tt>FuzzyMatrix</tt> from the data array of the given
+    <tt>FuzzyMatrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">M</SPAN>.data,<SPAN STYLE="COLOR:GREEN">true</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="components" href="#contents">Object Components</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <a name="degrees"></a> The <tt>degrees</tt> of this fuzzy matrix
+    are its entries.  This set is represented as a list of
+    <tt>double</tt>s kept in ascending order.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoubleArrayList</STRONG></SPAN> degrees = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoubleArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ************************************************************************ */</EM></SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="objectmethods" href="#contents">Object Methods</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="setget" href="#contents">Component-Setter/Getter Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this <tt>FuzzyMatrix</tt> to have the given two-dimensional
+    data array of <tt>double</tt>s and corresponding numbers of rows
+    and columns.  If the array is <tt>null</tt>, throw a runtime
+    exception.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> setData <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN>.setData<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Set the (<tt>i</tt>,<tt>j</tt>) entry of this <tt>Matrix</tt> to
+    the given <tt>value</tt> and returns the previous value that was
+    there. Throws a <tt>NonFuzzyValueException</tt> exception if
+    <tt>degree</tt> is not within <tt>[0.0,1.0]</tt>. Throws a
+    <tt>RuntimeException</tt> for indices out of bounds.  <b>N.B.:</b>
+    Matrix indices are counted from <tt>1</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> set <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> degree<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN>.set<SPAN STYLE="COLOR:#444444">(</SPAN>i,j,<SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyTools</STRONG></SPAN>.checkFuzzyValue<SPAN STYLE="COLOR:#444444">(</SPAN>degree<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ******************************************************************** */</EM></SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="closure" href="#contents">Fuzzy Matrix-Closure Methods</a>
+    </span></h4>
+   
+    The following public methods define the reflexive, symmetric,
+    transitive, and similarity closure operations on a fuzzy
+    matrix. Each closure operation comes in two versions: one that
+    returns a new fuzzy matrix without modifying the invoking matrix,
+    and one that modifies the data array of the invoking matrix in
+    place and returns the invoking matrix. The "in-place" version's
+    name of any operation is the same as the non-in-place version
+    starting with "<tt>i_</tt>".  Each pair of methods rely on a static
+    data version method (whose name starts with <code>data</code>),
+    acting on a <code>double[][]</code> data array and returning a
+    resulting <code>double[][]</code> data array. <p/>
+
+    As for all methods in this class, these work correctly assuming
+    specifically that all <tt>FuzzyMatrix</tt> objects are well-defined
+    (<i>i.e.</i>, they are all square and with entries in
+    <tt>[0.0,1.0]</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>FuzzyMatrix</tt> that is the reflexive
+    closure of this <tt>FuzzyMatrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> reflexive_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.i_reflexive_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this fuzzy matrix to its reflexive closure and return it(self).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> i_reflexive_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    dataReflexiveClosure<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Update the<code> data</code> array of this <code>FuzzyMatrix</code>
+    to its reflexive closure and return it(self).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> dataReflexiveClosure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row=<SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; data.length; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> = <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> data;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ************************************************************************ */</EM></SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <code>true</code> iff this <code>FuzzyMatrix</code> is
+    anti-symmetric (<i>i.e.</i>, symmetric entries may not be both
+    non-zero).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isAntiSymmetric <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> dataIsAntiSymmetric<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <code>true</code> iff the specified <code>data</code> array
+    is anti-symmetric (<i>i.e.</i>, symmetric entries may not be both
+    non-zero).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> dataIsAntiSymmetric <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; data.length-<SPAN STYLE="COLOR:#33AA33">1</SPAN>; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = row+<SPAN STYLE="COLOR:#33AA33">1</SPAN>; col &lt; data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> != <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN> &amp;&amp; data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> != <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ************************************************************************ */</EM></SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>FuzzyMatrix</tt> that is the symmetric
+    closure of this <tt>FuzzyMatrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> symmetric_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.i_symmetric_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this <tt>FuzzyMatrix</tt> to its symmetric closure and return it(self).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> i_symmetric_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    dataSymmetricClosure<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Update the given <code>data</code> array its symmetric closure and
+    return it(self).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> dataSymmetricClosure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; data.length; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = row+<SPAN STYLE="COLOR:#33AA33">1</SPAN>; col &lt; data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:#444444">{</SPAN>
+	  data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = sum<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>,
+			       data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	  data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> = data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>;
+	<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> data;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ************************************************************************ */</EM></SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>FuzzyMatrix</tt> that is the  transitive
+    closure of this <tt>FuzzyMatrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> transitive_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.i_transitive_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this <tt>FuzzyMatrix</tt> to its transitive closure and
+    return it(self).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> i_transitive_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> setData<SPAN STYLE="COLOR:#444444">(</SPAN>dataTransitiveClosure<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Compute the transitive closure of the fuzzy relation specified in
+    the <code>data</code> array and return the resulting array.  The
+    algorithm goes as follows: <p/>
+
+    <div>
+    Given a fuzzy matrix <tt>M</tt>, its transitive closure is the
+    matrix <tt>M</tt><sup>*</sup> = <font
+    size="+1">&cup;</font><sub><tt>i</tt>=<tt>0</tt>,...,<tt>n</tt></sub>
+    <tt>M<sup>i</sup></tt> which is computed as the limit of the
+    sequence <tt>N<sub>0</sub></tt> = <tt>M</tt>, and for <tt>k</tt>
+    &gt; <tt>0</tt>, <tt>N<sub>k</sub></tt> = <tt>N<sub>k-1</sub></tt>
+    &times; <tt>N<sub>k-1</sub></tt> until it becomes stationary;
+    <i>i.e.</i>, <tt>N<sub>k</sub></tt> = <tt>N<sub>k-1</sub></tt> =
+    <tt>M</tt><sup>*</sup>.
+    </div>
+
+    <p/>
+
+    This has complexity
+    <i>O</i>(<tt>n</tt><sup>3</sup>log(<tt>n</tt>)).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> dataTransitiveClosure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> newData = data;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> oldData;
+
+       <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> it = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>do</STRONG></SPAN> 
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:#88AA66"><EM>// it++;
+</EM></SPAN>	
+    	oldData = copyData<SPAN STYLE="COLOR:#444444">(</SPAN>newData<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    	newData = square<SPAN STYLE="COLOR:#444444">(</SPAN>oldData<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	<SPAN STYLE="COLOR:#88AA66"><EM>// 	System.err.println("&gt;&gt;&gt; PREVIOUS DATA:\n");
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	showDataArray(oldData);
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	System.err.println("&gt;&gt;&gt; SQUARED DATA:\n");
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	showDataArray(newData);
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	if (!equalData(newData,oldData))
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	  {
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	    String answer = Debug.step("continue computing dataTransitiveClosure? (\"q\" to quit)");
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	    if (Debug.isQuitString(answer))
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	      break;
+</EM></SPAN>	<SPAN STYLE="COLOR:#88AA66"><EM>// 	  }
+</EM></SPAN>      <SPAN STYLE="COLOR:#444444">}</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN>
+      <SPAN STYLE="COLOR:#444444">(</SPAN>!equalData<SPAN STYLE="COLOR:#444444">(</SPAN>newData,oldData<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println("&gt;&gt;&gt; Number of iterations = "+it);
+</EM></SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> newData;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>double[][]</tt> array equal to the matrix-square
+    of the given square data array.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> square <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println("&gt;&gt;&gt; CHECKING FUZZY OPS");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println("&gt;&gt;&gt; 0.4 \\/ 0.6 = "+sum(0.4,0.6));
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println("&gt;&gt;&gt; 0.4 /\\ 0.6 = "+product(0.4,0.6));
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println("&gt;&gt;&gt; SQUARING A "+data.length+" by "+data[0].length+" DATA ARRAY");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// showDataArray(data);
+</EM></SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> newData = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>data.length<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; data.length; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> k = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; k &lt; data.length; k++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    newData<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = sum<SPAN STYLE="COLOR:#444444">(</SPAN>newData<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>,
+				    product<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>k<SPAN STYLE="COLOR:#444444">]</SPAN>,
+					    data<SPAN STYLE="COLOR:#444444">[</SPAN>k<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	    <SPAN STYLE="COLOR:#88AA66"><EM>// if (newData[row][col] &gt; 1.0)
+</EM></SPAN>	    <SPAN STYLE="COLOR:#88AA66"><EM>//   System.err.println("&gt;&gt;&gt; Bad fuzzy entry: "+newData[row][col]);
+</EM></SPAN>	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// System.err.println("&gt;&gt;&gt; THE RESULTING SQUARED MATRIX IS:\n");
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// showDataArray(newData);
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// //    Debug.step("continue");
+</EM></SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> newData;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ************************************************************************ */</EM></SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>FuzzyMatrix</tt> that is the preorder
+    closure of this <tt>FuzzyMatrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> preorder_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.i_preorder_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;    
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this fuzzy matrix to its preorder (<i>i.e.</i>,
+    symmetric-transitive) closure and return it(self).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> i_preorder_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    data = dataPreorderClosure<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a <code>double[][]</code> array that is the preorder
+    (<i>i.e.</i>, reflexive-transitive) closure of the given
+    <code>data</code>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> dataPreorderClosure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> dataTransitiveClosure<SPAN STYLE="COLOR:#444444">(</SPAN>dataReflexiveClosure<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ************************************************************************ */</EM></SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a <tt>FuzzyMatrix</tt> that is the similarity closure
+    of this <tt>FuzzyMatrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> similarity_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> reflexive_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.i_symmetric_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.i_transitive_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this  <tt>FuzzyMatrix</tt> to its similarity closure and return it(self).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> i_similarity_closure <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> i_reflexive_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.i_symmetric_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.i_transitive_closure<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ******************************************************************** */</EM></SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Given a degree <tt>cut</tt> &isin; <tt>degrees</tt>,
+    <tt>partition(cut)</tt> of this <tt>FuzzyMatrix</tt> (when it is a
+    similarity relation on the set <tt>{0,...,N}</tt>), is an array of
+    <tt>N</tt> lists of <tt>int</tt>s, each list containing the indices
+    in the set <tt>{0,...,N}</tt> constituting a similarity class at a
+    fuzzy approximation degree <tt>&alpha;</tt> &isin;
+    <tt>[cut,1.0]</tt> (<i>i.e.</i>, it is a partition of the set
+    <tt>{0,...,N}</tt> for similarity degrees that are not less than
+    <tt>cut</tt>). The list at index <tt>i</tt> contains the indices of
+    the elements in the class <tt>[i]<sub>&alpha;</sub></tt> ordered in
+    ascending order, where<tt>[i]<sub>&alpha;</sub></tt> &#8797;
+    {<tt>j</tt> &isin; <tt>{0,...,N}</tt> | <tt>data[i][j]</tt> &geq;
+    <tt>&alpha;</tt>}. Each class is uniquely represented and shared by
+    all indices in the class (it is the same list object) for all
+    indices it contains. For example, if for <tt>N=6</tt>, the matrix
+    is:
+   
+    <p>
+   
+    <pre>
+         0   1   2   3   4   5
+        --- --- --- --- --- ---
+    0 | 1.0 0.5 0.0 0.5 0.4 0.2
+    1 | 0.5 1.0 0.0 0.5 0.4 0.0
+    2 | 0.0 0.0 1.0 0.0 0.0 0.0
+    3 | 0.5 0.5 0.0 1.0 0.4 1.2
+    4 | 0.4 0.4 0.0 0.4 1.0 0.2
+    5 | 0.2 0.2 0.0 0.2 0.2 1.0</pre>
+   
+    then its array <tt>degrees</tt> is <tt>[0.0,0.2,0.4,0.5,1.0]</tt>
+    and its <tt>partition(0.4)</tt> array is:
+
+    <pre>
+    0: A
+    1: A
+    2: B
+    3: A
+    4: A
+    5: C</pre>
+
+    with the three shared index lists:
+    <ul>
+    <li/><tt>A</tt> &#8797; <tt>[0,1,3,4] </tt>
+         (= <tt>[0]<sub>0.4</sub></tt>
+          = <tt>[1]<sub>0.4</sub></tt>
+          = <tt>[3]<sub>0.4</sub></tt>
+          = <tt>[4]<sub>0.4</sub></tt>);
+    <li/><tt>B</tt> &#8797; <tt>[2]       </tt>
+         (= <tt>[2]<sub>0.4</sub></tt>);  and,
+    <li/><tt>C</tt> &#8797; <tt>[5]       </tt>
+         (= <tt>[5]<sub>0.4</sub></tt>).
+    </ul>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> partition <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> cut<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rank = rows;
+    
+    <SPAN STYLE="COLOR:#88AA66"><EM>// The array of rank classes
+</EM></SPAN>    <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> classes = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rank<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// initialize all classes to singletons
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i=<SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; rank; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	classes<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN> = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	classes<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN>.add<SPAN STYLE="COLOR:#444444">(</SPAN>i<SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// sweep through the upper right triangle and merge the partitions
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// of equivalent pairs over or at the cut
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i=<SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; rank-<SPAN STYLE="COLOR:#33AA33">1</SPAN>; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#88AA66"><EM>// {
+</EM></SPAN>	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j=i+<SPAN STYLE="COLOR:#33AA33">1</SPAN>; j &lt; rank; j++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN> &gt;= cut<SPAN STYLE="COLOR:#444444">)</SPAN>
+	    <SPAN STYLE="COLOR:#88AA66"><EM>// merge the classes at indices i and j and sets all related elements classes
+</EM></SPAN>	    merge<SPAN STYLE="COLOR:#444444">(</SPAN>classes,i,j<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> classes;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This merges the classes <tt>classes[i]</tt> and <tt>classes[j]</tt>
+    into a new class keeping it sorted in increasing order, and sets
+    <tt>classes[k]</tt> to be this new merged class for all indices
+    <tt>k</tt> in this class.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> merge <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> classes, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN> c1 = classes<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN> c2 = classes<SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>c1 != c2<SPAN STYLE="COLOR:#444444">)</SPAN> <SPAN STYLE="COLOR:#88AA66"><EM>// otherwise this would keep going
+</EM></SPAN>      <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>c2.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> &lt; c1.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:#444444">{</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> k=<SPAN STYLE="COLOR:#33AA33">0</SPAN>; k &lt; c2.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; k++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	    insertIndex<SPAN STYLE="COLOR:#444444">(</SPAN>c2.get<SPAN STYLE="COLOR:#444444">(</SPAN>k<SPAN STYLE="COLOR:#444444">)</SPAN>,c1<SPAN STYLE="COLOR:#444444">)</SPAN>;
+	  <SPAN STYLE="COLOR:#88AA66"><EM>// update all appropriate classes to the merged class
+</EM></SPAN>	  <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> k=<SPAN STYLE="COLOR:#33AA33">0</SPAN>; k &lt; c1.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; k++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	    classes<SPAN STYLE="COLOR:#444444">[</SPAN>c1.get<SPAN STYLE="COLOR:#444444">(</SPAN>k<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> = c1;
+	<SPAN STYLE="COLOR:#444444">}</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>else</STRONG></SPAN>
+	<SPAN STYLE="COLOR:#444444">{</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> k=<SPAN STYLE="COLOR:#33AA33">0</SPAN>; k &lt; c1.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; k++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	    insertIndex<SPAN STYLE="COLOR:#444444">(</SPAN>c1.get<SPAN STYLE="COLOR:#444444">(</SPAN>k<SPAN STYLE="COLOR:#444444">)</SPAN>,c2<SPAN STYLE="COLOR:#444444">)</SPAN>;
+	  <SPAN STYLE="COLOR:#88AA66"><EM>// update all appropriate classes to the merged class
+</EM></SPAN>	  <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> k=<SPAN STYLE="COLOR:#33AA33">0</SPAN>; k &lt; c2.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; k++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	    classes<SPAN STYLE="COLOR:#444444">[</SPAN>c2.get<SPAN STYLE="COLOR:#444444">(</SPAN>k<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> = c2;
+	<SPAN STYLE="COLOR:#444444">}</SPAN>
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Adds <tt>index</tt> to <tt>orderedClass</tt> keeping it in
+    increasing order.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> insertIndex <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> index, <SPAN STYLE="COLOR:#4400DD"><STRONG>IntArrayList</STRONG></SPAN> orderedClass<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> size = orderedClass.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>i &lt; size &amp;&amp; orderedClass.get<SPAN STYLE="COLOR:#444444">(</SPAN>i<SPAN STYLE="COLOR:#444444">)</SPAN> &lt; index<SPAN STYLE="COLOR:#444444">)</SPAN>
+      i++;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>index != orderedClass.get<SPAN STYLE="COLOR:#444444">(</SPAN>i<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      orderedClass.add<SPAN STYLE="COLOR:#444444">(</SPAN>i,index<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ******************************************************************** */</EM></SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="misc" href="#contents">Miscellaneous Object Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the supremum of its arguments as elements of a
+    <tt>FuzzyAlgebra</tt> (<i>i.e.</i>, their <tt>sum</tt>, as defined
+    by the current <tt>FuzzyAlgebra</tt> in effect).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> sup <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> sum<SPAN STYLE="COLOR:#444444">(</SPAN>x,y<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the infimum of its arguments as elements of a
+    <tt>FuzzyAlgebra</tt> (<i>i.e.</i>, their <tt>product</tt>, as
+    defined by the current <tt>FuzzyAlgebra</tt> in effect).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> inf <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> product<SPAN STYLE="COLOR:#444444">(</SPAN>x,y<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>FuzzyMatrix</tt> that is the transpose of this
+    one.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> transpose <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.setData<SPAN STYLE="COLOR:#444444">(</SPAN>dataTranspose<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> i_transpose <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>!isSquare<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN>
+	<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Cannot transpose a non-square matrix in place"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+      
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rank = rank<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; rank; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j = i+<SPAN STYLE="COLOR:#33AA33">1</SPAN>; j &lt; rank; j++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:#444444">{</SPAN>
+	  <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> tmp = data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN>;
+	  data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN> = data<SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN>;
+	  data<SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN> = tmp;
+	<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the set of degrees of this fuzzy matrix.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoubleArrayList</STRONG></SPAN> degrees <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>degrees.isEmpty<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      computeDegrees<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> degrees;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Recompute and returns the set of degrees of this fuzzy matrix.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoubleArrayList</STRONG></SPAN> computeDegrees <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    degrees.setSize<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// erase all entries if any
+</EM></SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; rows; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; j &lt; cols; j++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	addDegree<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> degrees;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Inserts a double <tt>degree</tt> into this matrix' set of degree
+    keeping this set sorted in increasing order, and returns the set.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>DoubleArrayList</STRONG></SPAN> addDegree <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> degree<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>i &lt; degrees.size<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> &amp;&amp; degree &gt; degrees.get<SPAN STYLE="COLOR:#444444">(</SPAN>i<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      i++;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>degree != degrees.get<SPAN STYLE="COLOR:#444444">(</SPAN>i<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#88AA66"><EM>// will shift degrees at indices to the right and insert degree at i
+</EM></SPAN>      degrees.add<SPAN STYLE="COLOR:#444444">(</SPAN>i,degree<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> degrees;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>FuzzyMatrix</tt> with a data array that is
+    a copy of this one's.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> copy <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> copy<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>FuzzyMatrix</tt> having a different data array
+    than that of the given one, but containg equal array degrees as the
+    given one.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> copy <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> copy<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>FuzzyMatrix</tt> whose data array is a copy
+    of the given <tt>data</tt> array.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> copy <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>data,<SPAN STYLE="COLOR:GREEN">COPY</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ******************************************************************** */</EM></SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="classmethods" href="#contents">Class Components and Methods</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Just a convenience to remind that making a copy is in effect (can
+    then be used instead of <tt>true</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">COPY</SPAN> = <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    A public handle to the canonical <tt>FuzzyAlgebra</tt> currently in
+    effect.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyAlgebra</STRONG></SPAN> fuzzyAlgebra <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyAlgebra</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.currentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ******************************************************************** */</EM></SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create and return a random <tt>rows</tt>-by-<tt>cols</tt>
+    <tt>FuzzyMatrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN> random <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyMatrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.setData<SPAN STYLE="COLOR:#444444">(</SPAN>randomDataArray<SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+</PRE>
+<P>
+<HR>
+<P ALIGN="RIGHT"><SPAN STYLE="COLOR:#F07070"><EM>
+This file was generated on Wed Dec 18 03:38:08 PST 2019 from file <SPAN STYLE="COLOR:BROWN"><KBD>FuzzyMatrix.java</KBD></SPAN><BR>by the <SPAN STYLE="COLOR:BROWN"><KBD>hlt.language.tools.Hilite</KBD></SPAN> Java tool written by <A HREF="http://hassan-ait-kaci.net">Hassan A&iuml;t-Kaci</A></EM></SPAN>
+<P>
+<HR>
+</BODY>
+</HTML>

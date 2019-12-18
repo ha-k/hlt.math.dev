@@ -1,0 +1,377 @@
+<HTML>
+<HEAD>
+<TITLE>
+FuzzyAlgebra.html
+</TITLE>
+<LINK REL="STYLESHEET" TYPE="text/css" HREF="style.css">
+</HEAD>
+<BODY BGCOLOR="#CCCFF">
+<CENTER>
+<TABLE BGCOLOR=white WIDTH=50% BORDER=5 CELLPADDING=20>
+<TR><TD ALIGN=CENTER>
+<SPAN STYLE="FONT-SIZE:XX-LARGE"><TT><B>FuzzyAlgebra.java</B></TT></SPAN>
+<P>
+</TD></TR>
+</TABLE>
+</CENTER>
+<PRE>
+<SPAN STYLE="COLOR:#88AA66"><EM>// FILE. . . . . d:/hak/hlt/src/hlt/math/fuzzy/sources/FuzzyAlgebra.java
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// EDIT BY . . . Hassan Ait-Kaci
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// ON MACHINE. . Hak-Laptop
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// STARTED ON. . Tue Dec  3 17:40:58 2019
+</EM></SPAN>
+<SPAN STYLE="COLOR:BROWN"><STRONG>package</STRONG></SPAN> hlt.math.fuzzy;
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <a href="000StartHere.html"><tt>package hlt.math.fuzzy</tt>
+  package documentation listing</a>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.math.matrix.<SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>;
+
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  This is an abstract subclass of
+  <tt>hlt.math.matrix.NumberAlgebra</tt> defining its
+  <tt>NumberAlgebra</tt> operations as the fuzzy algebra with the final
+  methods <tt>zero()</tt> as <tt>0.0</tt>, <tt>one()</tt> as
+  <tt>1.0</tt>, <tt>negation(x)</tt> as <tt>one()-x</tt>, and
+  <tt>difference(x,y)</tt> as <tt>sum(x,negation(y))</tt>. The methods
+  <tt>sum</tt> and <tt>product</tt> are abstract and expected to be
+  redefined in concrete subclasses. Default implementations are
+  provided for <tt>sum</tt> as <tt>Math.max</tt>, and <tt>product</tt>
+  as <tt>Math.min</tt>.<p/>
+
+  <b>N.B.:</b> For this to work correctly, all values must be
+  <tt>double</tt>s in <tt>[0.0,1.0]</tt>. This methods defined in this
+  class do not check whether their arguments are such <tt>double</tt>s.<p/>
+ 
+  <span style="font-family:arial,helvetica;"> <a
+  name="contents"><b>Contents</b></a> <small>(<a
+  href="000StartHere.html"><tt>package hlt.math.matrix</tt>
+  documentation listing</a>)</small>
+
+  <ul>
+  <li><a href="#operations">Fuzzy Algebra Operations</a></li>
+  <p/>
+  <li><a href="#algebras">Defined Fuzzy Algebras</a></li>
+  <p/>
+  </ul>
+  </span>
+ 
+             
+       
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>See also:</STRONG></TD><TD>&nbsp;</TD>
+<TD><A HREF="ZadehAlgebra.html">ZadehAlgebra</A>, <A HREF="LukasieviczAlgebra.html">LukasieviczAlgebra</A>, <A HREF="ProbabilisticAlgebra.html">ProbabilisticAlgebra</A>, <A HREF="../matrix/Matrix.html">/matrix/Matrix</A>, <A HREF="../matrix/NumberAlgebra.html">/matrix/NumberAlgebra</A>, <A HREF="../matrix/MatrixPackageDescription.html">/matrix/MatrixPackageDescription</A>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Copyright:</STRONG></TD><TD>&nbsp;</TD>
+<TD>&copy; <a href="http://www.hassan-ait-kaci.net/">by the author</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Author:</STRONG></TD><TD>&nbsp;</TD>
+<TD><a href="mailto:hak@acm.org">Hassan A&iuml;t-Kaci</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Version:</STRONG></TD><TD>&nbsp;</TD>
+<TD>Last modified on Sun Dec 15 11:32:32 2019 by hak
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+<SPAN STYLE="COLOR:PURPLE"><STRONG>abstract</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>FuzzyAlgebra</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>extends</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Defines the <tt>String</tt> form for this
+    <tt>FuzzyAlgebra</tt>. It must be redefined in a subclass.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> toString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#D2691E"><EM>"Abstract Fuzzy Algebra"</EM></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="operations" href="#contents">Fuzzy Algebra Operations</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Define <tt>zero()</tt> as <tt>0.0</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> zero <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>one</tt> of this algebra as <tt>1.0</tt>.  It
+    verifies <tt>product(x,one())</tt> = <tt>product(one(),x)</tt> =
+    <tt>x</tt>, for any <tt>double</tt> <tt>x</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> one <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Define <tt>negation(x)</tt> as <tt>one()-x</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> negation <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> one<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>-x;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Define <tt>difference(x,y)</tt> as <tt>sum(x,negation(y))</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> difference <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> sum<SPAN STYLE="COLOR:#444444">(</SPAN>x,negation<SPAN STYLE="COLOR:#444444">(</SPAN>y<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;	
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ************************************************************************ */</EM></SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="algebras" href="#contents">Defined Fuzzy Algebras</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Set the current fuzzy algebra to the canonical default
+    <tt>FuzzyAlgebra</tt> (<tt>zadehAlgebra</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> setDefaultAlgebra <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.setCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN>zadehAlgebra<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    A package-accessible handle to a canonical <tt>ZadehAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>ZadehAlgebra</STRONG></SPAN> zadehAlgebra
+    = <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>ZadehAlgebra</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.registeredAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>ZadehAlgebra</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the canonical <tt>ZadehAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>ZadehAlgebra</STRONG></SPAN> zadehAlgebra <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> zadehAlgebra;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Set the current fuzzy algebra to the canonical
+    <tt>ZadehAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> setZadehAlgebra <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.setCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN>zadehAlgebra<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    A package-accessible handle to a canonical <tt>LukasieviczAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>LukasieviczAlgebra</STRONG></SPAN> lukasieviczAlgebra
+    = <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>LukasieviczAlgebra</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.registeredAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>LukasieviczAlgebra</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Set the current fuzzy algebra to the canonical
+    <tt>LukasieviczAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> setLukasieviczAlgebra <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.setCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN>lukasieviczAlgebra<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    A package-accessible handle to a canonical <tt>ProbabilisticAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>ProbabilisticAlgebra</STRONG></SPAN> probabilisticAlgebra
+    = <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>ProbabilisticAlgebra</STRONG></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.registeredAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>ProbabilisticAlgebra</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Set the current fuzzy algebra to the canonical
+    <tt>ProbabilisticAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> setProbabilisticAlgebra <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.setCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN>probabilisticAlgebra<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+</PRE>
+<P>
+<HR>
+<P ALIGN="RIGHT"><SPAN STYLE="COLOR:#F07070"><EM>
+This file was generated on Wed Dec 18 03:38:08 PST 2019 from file <SPAN STYLE="COLOR:BROWN"><KBD>FuzzyAlgebra.java</KBD></SPAN><BR>by the <SPAN STYLE="COLOR:BROWN"><KBD>hlt.language.tools.Hilite</KBD></SPAN> Java tool written by <A HREF="http://hassan-ait-kaci.net">Hassan A&iuml;t-Kaci</A></EM></SPAN>
+<P>
+<HR>
+</BODY>
+</HTML>

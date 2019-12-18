@@ -1,0 +1,3216 @@
+<HTML>
+<HEAD>
+<TITLE>
+Matrix.html
+</TITLE>
+<LINK REL="STYLESHEET" TYPE="text/css" HREF="style.css">
+</HEAD>
+<BODY BGCOLOR="#CCCFF">
+<CENTER>
+<TABLE BGCOLOR=white WIDTH=50% BORDER=5 CELLPADDING=20>
+<TR><TD ALIGN=CENTER>
+<SPAN STYLE="FONT-SIZE:XX-LARGE"><TT><B>Matrix.java</B></TT></SPAN>
+<P>
+</TD></TR>
+</TABLE>
+</CENTER>
+<PRE>
+<SPAN STYLE="COLOR:#88AA66"><EM>// FILE. . . . . d:/hak/hlt/src/hlt/math/matrix/sources/Matrix.java
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// EDIT BY . . . Hassan Ait-Kaci
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// ON MACHINE. . Hak-Laptop
+</EM></SPAN><SPAN STYLE="COLOR:#88AA66"><EM>// STARTED ON. . Fri Nov 15 13:09:37 2019
+</EM></SPAN>
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+       
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>Copyright:</STRONG></TD><TD>&nbsp;</TD>
+<TD>&copy; <a href="http://www.hassan-ait-kaci.net/">by the author</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Author:</STRONG></TD><TD>&nbsp;</TD>
+<TD><a href="mailto:hak@acm.org">Hassan A&iuml;t-Kaci</a>
+</TD></tr>
+<TR><TD VALIGN=TOP><STRONG>Version:</STRONG></TD><TD>&nbsp;</TD>
+<TD>Last modified on Sun Dec 15 12:09:10 2019 by hak
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>package</STRONG></SPAN> hlt.math.matrix;
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  <a href="000StartHere.html"><tt>package hlt.math.matrix</tt>
+  documentation listing</a>
+ 
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+<SPAN STYLE="COLOR:BROWN"><STRONG>import</STRONG></SPAN> hlt.language.tools.<SPAN STYLE="COLOR:#4400DD"><STRONG>Misc</STRONG></SPAN>;
+<SPAN STYLE="COLOR:#88AA66"><EM>// import hlt.math.fuzzy.StandardFuzzyAlgebra;
+</EM></SPAN>
+</PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+  This defines the class <tt>Matrix</tt> that implements basic
+  two-dimensional linear algebra in the form of a collection of
+  operations defined on a <tt>Matrix</tt> class represented as a 2D
+  array of <tt>double</tt>s.  <p/>
+ 
+  <span style="font-family:arial,helvetica;">
+  <a name="contents"><b>Contents</b></a> <small>(<a href="000StartHere.html"><tt>package hlt.math.matrix</tt>
+  documentation listing</a>)</small> 
+  <ul>
+  <li><a href="#constructors">Object Constructors</a></li>
+  <p/>
+  <li><a href="#components">Object Components</a></li>
+      <ul>
+      <li><a href="#access">Component-Access Methods</a></li>
+      <li><a href="#setget">Component-Setter/Getter Methods</a></li>
+      </ul>
+  <p/>
+  <li><a href="#objectmethods">Object Methods</a></li>
+      <ul>
+      <li><a href="#properties">Object Boolean Properties</a></li>
+      <li><a href="#square">Square-Matrix Specific Methods</a></li>
+      <li><a href="#vectors">Vector-Specific Methods</a></li>
+      <li><a href="#io">I/O Object Methods</a></li>
+      </ul>
+  <p/>
+  <li><a href="#classmethods">Static Methods</a></li>
+      <ul>
+      <li><a href="#useful">Useful Static Matrix Methods</a></li>
+      <li><a href="#checks">Consistency Checking</a></li>
+      <li><a href="#printing">Printing Control</a></li>
+      <li><a href="#precision">Precision Control</a></li>
+      <li><a href="#random">Random-Value Generation Control</a></li>
+      <li><a href="#miscio">Miscellaneous static I/O tools</a></li>
+      </ul>
+  </ul>
+  </span>
+ 
+   
+<P><TABLE>
+<TR><TD VALIGN=TOP><STRONG>See also:</STRONG></TD><TD>&nbsp;</TD>
+<TD><A HREF="NumberAlgebra.html">NumberAlgebra</A>
+</TD></tr>
+</TABLE>
+
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+<SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>class</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN>
+<SPAN STYLE="COLOR:#444444">{</SPAN>
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="constructors" href="#contents">Object Constructors</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a vacuous <tt>Matrix</tt> using the default entry algebra
+    (<tt>StandardAlgebra</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>super</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a vacuous <tt>Matrix</tt> setting the number algebra to
+    the given <tt>NumberAlgebra</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN> algebra<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.setCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN>algebra<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a <tt>rows</tt>-by-<tt>cols</tt> <tt>Matrix</tt> of
+    <tt>0.0</tt>'s.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>rows &lt;= <SPAN STYLE="COLOR:#33AA33">0</SPAN> || cols &lt;= <SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Illegal matrix dimensions: ("</EM></SPAN>+
+				 rows+<SPAN STYLE="COLOR:#D2691E"><EM>","</EM></SPAN>+cols+<SPAN STYLE="COLOR:#D2691E"><EM>")"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.rows = rows;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.cols = cols;
+    data = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rows<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>cols<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a square <tt>Matrix</tt> of order <tt>order</tt> with all
+    entries <tt>0.0</tt>'s.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>order &lt;= <SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Illegal square matrix order: ("</EM></SPAN>+
+				 order+<SPAN STYLE="COLOR:#D2691E"><EM>")"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.rows = order;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.cols = order;
+    data = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a new <tt>Matrix</tt> copying the given <tt>data</tt> 
+    array.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>data,<SPAN STYLE="COLOR:GREEN">false</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a new <tt>Matrix</tt> sharing the given <tt>data</tt>
+    array if <tt>inPlace</tt> is <tt>true</tt>, and copying it
+    otherwise.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data, <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> inPlace<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>inPlace<SPAN STYLE="COLOR:#444444">)</SPAN>
+      setData<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>else</STRONG></SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	rows = data.length;
+	cols = data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+	<SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.data = copyData<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Construct a new <tt>Matrix</tt> from the data array of the given
+    <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="components" href="#contents">Object Components</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The number of rows of this <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows;
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The number of columns of this <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is the <tt>rows</tt>-by-<tt>cols</tt> array containing the
+    entries of this <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="access" href="#contents">Component-Access Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>rank</tt> of this <tt>Matrix</tt>. It is always the
+    same as rows, but used only for square-matrix methods
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rank <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> rows;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>order</tt> of this <tt>Matrix</tt>. It is always the
+    same as rows, but used only for square-matrix methods
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> rows;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the number of rows of this <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> rows;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the number of columns of this <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> cols;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>data</tt> array of this <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> data;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="setget" href="#contents">Component-Setter/Getter Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Set the (<tt>i</tt>,<tt>j</tt>) entry of this <tt>Matrix</tt> to the
+    given <tt>value</tt> and return the previous value that was
+    there. Throws a <tt>RuntimeException</tt> for indices out of bounds.
+    <b>N.B.:</b> Matrix indices are counted from <tt>1</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> set <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> value<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// check for legal entry and adjust i and j to start from 0 in data in
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// the code following this
+</EM></SPAN>    checkLegalEntry<SPAN STYLE="COLOR:#444444">(</SPAN>i--,j--<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> safeDataUpdate<SPAN STYLE="COLOR:#444444">(</SPAN>i,j,truncate<SPAN STYLE="COLOR:#444444">(</SPAN>value<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Set the (<tt>row</tt>,<tt>col</tt>) entry of this <tt>Matrix</tt>
+    <tt>data</tt> array to the given <tt>value</tt> and return the
+    previous value that was there. <b>N.B.</b> This counts <tt>row</tt>
+    and <tt>col</tt> from <tt>0</tt> and assumes indexing is safe
+    (<i>e.g.</i>, after <tt>checkLegalEntry</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> safeDataUpdate <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> value<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> old = data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = value;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> old;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is an in-place pointwise update that modifies each entry of
+    this matrix to the value of the corresponding entry in the given
+    matrix.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> update <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>rows != <SPAN STYLE="COLOR:GREEN">M</SPAN>.rows || cols != <SPAN STYLE="COLOR:GREEN">M</SPAN>.cols<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Incompatible matrix dimensions: &lt;"</EM></SPAN>
+				 +rows+<SPAN STYLE="COLOR:#D2691E"><EM>","</EM></SPAN>+cols+<SPAN STYLE="COLOR:#D2691E"><EM>"&gt; =/= &lt;"</EM></SPAN>+<SPAN STYLE="COLOR:GREEN">M</SPAN>.rows+<SPAN STYLE="COLOR:#D2691E"><EM>","</EM></SPAN>+<SPAN STYLE="COLOR:GREEN">M</SPAN>.cols+<SPAN STYLE="COLOR:#D2691E"><EM>"&gt;"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; rows; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; j &lt; cols; j++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN> = <SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the value of in this <tt>Matrix</tt> are entry indices
+    (<tt>i</tt>,<tt>j</tt>). Throws a <tt>RuntimeException</tt> for
+    indices out of bounds.  <b>N.B.:</b> Matrix indices are counted from
+    <tt>1</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> get <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// check for legal entry and adjust i and j to start from 0 in data in
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// the code following this
+</EM></SPAN>    checkLegalEntry<SPAN STYLE="COLOR:#444444">(</SPAN>i--,j--<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modifies this matrix to have the given two-dimensional data array
+    of <tt>double</tt>s and corresponding numbers of rows and columns.
+    If the array <tt>null</tt> a runtime exception is thrown.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> setData <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data == <SPAN STYLE="COLOR:GREEN">null</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN>
+	<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Attempt to initialize a matrix with a null data array"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    rows = data.length;
+    cols = data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.data = data;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="objectmethods" href="#contents">Object Methods</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the sum of its <tt>double</tt> arguments as their
+    <tt>sum</tt> according to the current number algebra in effect.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> sum <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.getCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.sum<SPAN STYLE="COLOR:#444444">(</SPAN>x,y<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the product of its <tt>double</tt> arguments as their
+    <tt>product</tt> according to the current number algebra in effect.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> product <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.getCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.product<SPAN STYLE="COLOR:#444444">(</SPAN>x,y<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the difference of its <tt>double</tt> arguments as their
+    <tt>difference</tt> according to the current number algebra in
+    effect.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> difference <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> y<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.getCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.difference<SPAN STYLE="COLOR:#444444">(</SPAN>x,y<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the negation of its <tt>double</tt> argument as its
+    <tt>negation</tt> according to the current number algebra in
+    effect.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> negation <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> x<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.getCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.negation<SPAN STYLE="COLOR:#444444">(</SPAN>x<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>Matrix</tt> equal to <tt>this+M</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> plus <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.setData<SPAN STYLE="COLOR:#444444">(</SPAN>dataPlus<SPAN STYLE="COLOR:#444444">(</SPAN>data,<SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> dataPlus <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> <SPAN STYLE="COLOR:GREEN">A</SPAN>, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> <SPAN STYLE="COLOR:GREEN">B</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows = <SPAN STYLE="COLOR:GREEN">A</SPAN>.length;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols = <SPAN STYLE="COLOR:GREEN">A</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+    verifyCompatibleDimension<SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols,<SPAN STYLE="COLOR:GREEN">B</SPAN>.length,<SPAN STYLE="COLOR:GREEN">B</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> newData = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rows<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>cols<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	newData<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = sum<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">A</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>,
+				<SPAN STYLE="COLOR:GREEN">B</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> newData;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify in place the entries of <tt>this</tt> to those of
+    <tt>this</tt> plus <tt>M</tt> and return <tt>this</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> i_plus <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    verifyCompatibleDimension<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">M</SPAN>.rows,<SPAN STYLE="COLOR:GREEN">M</SPAN>.cols,rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = sum<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>,
+			     <SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>Matrix</tt> equal to <tt>this</tt> times
+    <tt>M</tt> (does not modify <tt>this</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> times <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>cols != <SPAN STYLE="COLOR:GREEN">M</SPAN>.rows<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Cannot multiply a "</EM></SPAN>+rows+<SPAN STYLE="COLOR:#D2691E"><EM>"x"</EM></SPAN>+cols+
+				 <SPAN STYLE="COLOR:#D2691E"><EM>" matrix by a "</EM></SPAN>+<SPAN STYLE="COLOR:GREEN">M</SPAN>.rows+<SPAN STYLE="COLOR:#D2691E"><EM>"x"</EM></SPAN>+<SPAN STYLE="COLOR:GREEN">M</SPAN>.cols+<SPAN STYLE="COLOR:#D2691E"><EM>" matrix"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> result = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>rows,<SPAN STYLE="COLOR:GREEN">M</SPAN>.cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; <SPAN STYLE="COLOR:GREEN">M</SPAN>.cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:#444444">{</SPAN>
+	  <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> entry = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> k = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; k &lt; cols; k++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	    entry = sum<SPAN STYLE="COLOR:#444444">(</SPAN>entry,
+			product<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>k<SPAN STYLE="COLOR:#444444">]</SPAN>,
+				<SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">[</SPAN>k<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	  <SPAN STYLE="COLOR:#88AA66"><EM>// N.B: since multiplying two truncated entries may exceed the
+</EM></SPAN>	  <SPAN STYLE="COLOR:#88AA66"><EM>// truncation limit, the resulting matrix entry must be truncated
+</EM></SPAN>	  result.data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = truncate<SPAN STYLE="COLOR:#444444">(</SPAN>entry<SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> result;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify in place the entries of <tt>this</tt> to those of
+    <tt>this</tt> times <tt>M</tt> and return <tt>this</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> i_times <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> setData<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>.times<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>Matrix</tt> equal to <tt>this-M</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> minus <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    verifyCompatibleDimension<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">M</SPAN>.rows,<SPAN STYLE="COLOR:GREEN">M</SPAN>.cols,rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> result = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	result.data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = difference<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>,
+					   <SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> result;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this <tt>Matrix</tt> to <tt>this-M</tt> and return
+    <tt>this</tt>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> i_minus <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    verifyCompatibleDimension<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">M</SPAN>.rows,<SPAN STYLE="COLOR:GREEN">M</SPAN>.cols,rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = difference<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>,
+				    <SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>Matrix</tt> equal to <tt>-this</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> minus <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> result = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	result.data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = negation<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> result;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this <tt>Matrix</tt> to <tt>-M</tt> and return
+    <tt>this</tt>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> i_minus <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = negation<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>Matrix</tt> each entry of which is equal the
+    corresponding entry in <tt>this</tt> multiplied by <tt>scale</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> scale <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> factor<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> result = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#88AA66"><EM>// N.B: since multiplying a truncated entry by a double may
+</EM></SPAN>	  <SPAN STYLE="COLOR:#88AA66"><EM>// exceed the truncation limit, the resulting matrix entry must
+</EM></SPAN>	  <SPAN STYLE="COLOR:#88AA66"><EM>// be truncated
+</EM></SPAN>	result.data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = truncate<SPAN STYLE="COLOR:#444444">(</SPAN>factor*data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> result;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modify this <tt>Matrix</tt> to <tt>factorthis</tt> and return
+    <tt>this</tt>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> i_scale <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> factor<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#88AA66"><EM>// N.B: since multiplying a truncated entry by a double may
+</EM></SPAN>	  <SPAN STYLE="COLOR:#88AA66"><EM>// exceed the truncation limit, the resulting matrix entry must
+</EM></SPAN>	  <SPAN STYLE="COLOR:#88AA66"><EM>// be truncated
+</EM></SPAN>	data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = truncate<SPAN STYLE="COLOR:#444444">(</SPAN>factor*data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff <tt>this</tt> matrix and </tt>M</tt> are
+    entry-wise equal.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> equal <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">M</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    verifyCompatibleDimension<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">M</SPAN>.rows,<SPAN STYLE="COLOR:GREEN">M</SPAN>.cols,rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> equalData<SPAN STYLE="COLOR:#444444">(</SPAN>data,<SPAN STYLE="COLOR:GREEN">M</SPAN>.data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Swap rows <tt>row</tt> and <tt>col</tt> of <tt>this</tt>
+    <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> swapRows <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> tmp = data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> = data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = tmp;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Swap columns <tt>row</tt> and <tt>col</tt> of <tt>this</tt>
+    <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> swapCols <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> tmp;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> k = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; k &lt; data.length; k++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	tmp = data<SPAN STYLE="COLOR:#444444">[</SPAN>k<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN>;
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>k<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> = data<SPAN STYLE="COLOR:#444444">[</SPAN>k<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>;
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>k<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = tmp;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>Matrix</tt> that is the transpose of this one.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> transpose <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.setData<SPAN STYLE="COLOR:#444444">(</SPAN>dataTranspose<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="properties" href="#contents">Object Boolean Properties</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> if this <tt>Matrix</tt> is pointwise-equal to
+    the given one.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> equals <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">B</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">A</SPAN> = <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;    
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">A</SPAN> == <SPAN STYLE="COLOR:GREEN">B</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">A</SPAN>.data == <SPAN STYLE="COLOR:GREEN">B</SPAN>.data<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">B</SPAN>.rows != <SPAN STYLE="COLOR:GREEN">A</SPAN>.rows || <SPAN STYLE="COLOR:GREEN">B</SPAN>.cols != <SPAN STYLE="COLOR:GREEN">A</SPAN>.cols<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Incompatible matrix dimensions: &lt;"</EM></SPAN>
+				 +<SPAN STYLE="COLOR:GREEN">A</SPAN>.rows+<SPAN STYLE="COLOR:#D2691E"><EM>","</EM></SPAN>+<SPAN STYLE="COLOR:GREEN">A</SPAN>.cols+<SPAN STYLE="COLOR:#D2691E"><EM>"&gt; =/= &lt;"</EM></SPAN>+<SPAN STYLE="COLOR:GREEN">B</SPAN>.rows+<SPAN STYLE="COLOR:#D2691E"><EM>","</EM></SPAN>+<SPAN STYLE="COLOR:GREEN">B</SPAN>.cols+<SPAN STYLE="COLOR:#D2691E"><EM>"&gt;"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; rows; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; j &lt; cols; j++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">A</SPAN>.data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN> != <SPAN STYLE="COLOR:GREEN">B</SPAN>.data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>j<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this matrix has no data array.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isVacuous <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> data == <SPAN STYLE="COLOR:GREEN">null</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff <tt>this</tt> <tt>Matrix</tt> is
+    degenerate (<i>i.e.</i>, one of its rows or columns has only
+    <tt>0.0</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isDegenerate <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>degenerateRow<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> != -<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> || <SPAN STYLE="COLOR:#444444">(</SPAN>degenerateCol<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> != -<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the row index of a row that contains only <tt>0.0</tt> if
+    there exists one; <tt>-1</tt> otherwise.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> degenerateRow <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+	<SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> rowIsAllZero = <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+	
+	<SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>rowIsAllZero &amp;&amp; col &lt; cols<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    rowIsAllZero = <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> == <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	    col++;
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>rowIsAllZero<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> row;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>	
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> -<SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the column index of a column that contains only
+    <tt>0.0</tt> if there exists one; <tt>-1</tt> otherwise.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> degenerateCol <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+	<SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> colIsAllZero = <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+	
+	<SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>colIsAllZero &amp;&amp; row &lt; rows<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    colIsAllZero = <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> == <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	    row++;
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>colIsAllZero<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> col;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>	
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> -<SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff all entries are <tt>0.0</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isZeroMatrix <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> != <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:#88AA66"><EM>/* ************************************************************************ */</EM></SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this is a row-stochastic matrix;
+    <i>i.e.</i>, all the rows are in <tt>[0.0,1.0]</tt> and their
+    components add up to <tt>1.0</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isRowStochastic <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> isRowStochastic<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modifies this non-negative <tt>matrix</tt> in place so that all its
+    rows have non-negative entries that add up to <tt>1</tt>. It does
+    so by normalizing each entry by dividing it by the sum of all the
+    entries on its row.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> makeRowStochastic <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      normalizeRow<SPAN STYLE="COLOR:#444444">(</SPAN>row<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this is a column-stochastic matrix;
+    <i>i.e.</i>, all the columns are in <tt>[0.0,1.0]</tt> and their
+    components add up to <tt>1.0</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isColumnStochastic <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> isColumnStochastic<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this is a doubly-stochastic matrix;
+    <i>i.e.</i>, that it all the rows and all the columns have only
+    entries in <tt>[0.0,1.0]</tt> that add up to <tt>1.0</tt> in each
+    dimension.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isDoublyStochastic <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> isDoublyStochastic<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff the given <tt>data</tt> array this is a
+    row-stochastic matrix; <i>i.e.</i>, all the rows are in
+    <tt>[0.0,1.0]</tt> and their components add up to <tt>1.0</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isRowStochastic <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows = data.length;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols = data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> rowSum = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+	
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &lt; <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN> || data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &gt; <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// not within [0.0,1.0]
+</EM></SPAN>
+	    rowSum = sum<SPAN STYLE="COLOR:#444444">(</SPAN>rowSum,
+			 data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>truncate<SPAN STYLE="COLOR:#444444">(</SPAN>rowSum<SPAN STYLE="COLOR:#444444">)</SPAN> != <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// ok - we're good
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;	  
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff the given <tt>data</tt> array is
+    column-stochastic; <i>i.e.</i>, all the columns are in
+    <tt>[0.0,1.0]</tt> and their components add up to <tt>1.0</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isColumnStochastic <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows = data.length;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols = data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> colSum = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+	
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &lt; <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN> || data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &gt; <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// not within [0.0,1.0]
+</EM></SPAN>
+	    colSum = sum<SPAN STYLE="COLOR:#444444">(</SPAN>colSum,
+			 data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>truncate<SPAN STYLE="COLOR:#444444">(</SPAN>colSum<SPAN STYLE="COLOR:#444444">)</SPAN> != <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// ok - we're good
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;	  
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this is a doubly-stochastic data array;
+    <i>i.e.</i>, that it all the rows and all the columns have only
+    entries in <tt>[0.0,1.0]</tt> that add up to <tt>1.0</tt> in each
+    dimension.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isDoublyStochastic <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows = data.length;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols = data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// as we compute for each row the sum of its entries we also
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// accumulate the sum on entries for each column and store it in
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// this array until we reach the last row
+</EM></SPAN>    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> colSums = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rows<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> rowSum = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+	
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &lt; <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN> || data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &gt; <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// not within [0.0,1.0]
+</EM></SPAN>
+	    rowSum = sum<SPAN STYLE="COLOR:#444444">(</SPAN>rowSum,
+			 data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	    colSums<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> = sum<SPAN STYLE="COLOR:#444444">(</SPAN>colSums<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN>,
+			       data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>rowSum != <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// if we're here, we need to check each column sums
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>truncate<SPAN STYLE="COLOR:#444444">(</SPAN>colSums<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> != <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// ok - we're good
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;	  
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Modifies the <tt>row</tt>-th row of this <tt>Matrix</tt> by
+    normalizing each of its entries by dividing it by the sum of all
+    the entries on this row.  <b>N.B.: This does not works due to
+    rounding issue (see <tt>truncate</tt>).</b>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> normalizeRow <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> rowSum = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// the sum of the entries on this row
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"------------------------------------------------------------------------"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Row sum ["</EM></SPAN>+row+<SPAN STYLE="COLOR:#D2691E"><EM>"]:"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"------------------------------------------------------------------------"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = truncate<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &lt; <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN>
+	    <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Negative data array entry "</EM></SPAN>+data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>+<SPAN STYLE="COLOR:#D2691E"><EM>" at indices "</EM></SPAN>+
+	     row+<SPAN STYLE="COLOR:#D2691E"><EM>","</EM></SPAN>+col+<SPAN STYLE="COLOR:#D2691E"><EM>": can only make non-negative matrix row-stochastic."</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.print<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>" "</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.printf<SPAN STYLE="COLOR:#444444">(</SPAN>floatFormatString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>,data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.print<SPAN STYLE="COLOR:#444444">(</SPAN>col&lt;<SPAN STYLE="COLOR:#444444">(</SPAN>cols-<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>?<SPAN STYLE="COLOR:#D2691E"><EM>"+"</EM></SPAN>:<SPAN STYLE="COLOR:#D2691E"><EM>""</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	rowSum = sum<SPAN STYLE="COLOR:#444444">(</SPAN>rowSum,
+		     data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    rowSum = truncate<SPAN STYLE="COLOR:#444444">(</SPAN>rowSum<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>" ---&gt; rowSum["</EM></SPAN>+row+<SPAN STYLE="COLOR:#D2691E"><EM>"] = "</EM></SPAN>+rowSum<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>rowSum == <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN>; <SPAN STYLE="COLOR:#88AA66"><EM>// then there is nothing to do
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// needed to sum the normalized row entries to offset rounding errors
+</EM></SPAN>    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> normalizedRowSum = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> actualNormalizedRowSum = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> == rowSum<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN> <SPAN STYLE="COLOR:#88AA66"><EM>// this means that the row has only one non-zero at col
+</EM></SPAN>	    <SPAN STYLE="COLOR:#88AA66"><EM>// so the normalized value at col is 1.00 (and all
+</EM></SPAN>	    <SPAN STYLE="COLOR:#88AA66"><EM>// others still 0.0)
+</EM></SPAN>	    data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = normalizedRowSum = actualNormalizedRowSum = <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+	    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN>;
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+	<SPAN STYLE="COLOR:#88AA66"><EM>// dividing by the sum is safe since != 0.0:
+</EM></SPAN>	<SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> normalizedEntry = truncate<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>/rowSum<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.print<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>" "</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.printf<SPAN STYLE="COLOR:#444444">(</SPAN>floatFormatString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>,normalizedEntry<SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.print<SPAN STYLE="COLOR:#444444">(</SPAN>col&lt;<SPAN STYLE="COLOR:#444444">(</SPAN>cols-<SPAN STYLE="COLOR:#33AA33">1</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>?<SPAN STYLE="COLOR:#D2691E"><EM>"+"</EM></SPAN>:<SPAN STYLE="COLOR:#D2691E"><EM>""</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>col == lastNonZeroColInRow<SPAN STYLE="COLOR:#444444">(</SPAN>row<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#444444">{</SPAN> <SPAN STYLE="COLOR:#88AA66"><EM>// this is the last non-zero in this row: adjust to how
+</EM></SPAN>	    <SPAN STYLE="COLOR:#88AA66"><EM>// close to 1.0: i.e., 1.0 - sum of all the previous non-0
+</EM></SPAN>	    <SPAN STYLE="COLOR:#88AA66"><EM>// normalized entries!
+</EM></SPAN>	    data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = difference<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>,
+					actualNormalizedRowSum<SPAN STYLE="COLOR:#444444">)</SPAN>;
+	    actualNormalizedRowSum = sum<SPAN STYLE="COLOR:#444444">(</SPAN>actualNormalizedRowSum,
+					 normalizedEntry<SPAN STYLE="COLOR:#444444">)</SPAN>;
+	    normalizedRowSum = <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>else</STRONG></SPAN> <SPAN STYLE="COLOR:#88AA66"><EM>// otherwise, just normalize the entry:
+</EM></SPAN>	  <SPAN STYLE="COLOR:#444444">{</SPAN>
+	    actualNormalizedRowSum = sum<SPAN STYLE="COLOR:#444444">(</SPAN>actualNormalizedRowSum,
+					 normalizedEntry<SPAN STYLE="COLOR:#444444">)</SPAN>;
+	    data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = normalizedEntry;
+	  <SPAN STYLE="COLOR:#444444">}</SPAN>
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>" ---&gt; actualNormalizedRowSum["</EM></SPAN>+row+<SPAN STYLE="COLOR:#D2691E"><EM>"] = "</EM></SPAN>+actualNormalizedRowSum<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#88AA66"><EM>//    System.err.println(" ---&gt; normalizedRowSum["+row+"] = "+normalizedRowSum);
+</EM></SPAN>    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>truncate<SPAN STYLE="COLOR:#444444">(</SPAN>actualNormalizedRowSum<SPAN STYLE="COLOR:#444444">)</SPAN> == <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Actual normalized sum of row["</EM></SPAN>+row+
+			 <SPAN STYLE="COLOR:#D2691E"><EM>"] is close enough to 1.0: so row["</EM></SPAN>+row+
+			 <SPAN STYLE="COLOR:#D2691E"><EM>"] is deemed row-stochastic"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>else</STRONG></SPAN>
+      <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Actual normalized sum of row["</EM></SPAN>+row+
+			 <SPAN STYLE="COLOR:#D2691E"><EM>"] is NOT close enough to 1.0: so row["</EM></SPAN>+row+
+			 <SPAN STYLE="COLOR:#D2691E"><EM>"] is NOT row-stochastic"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.err.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"------------------------------------------------------------------------"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the column index of the first non-zero entry in the given
+    <tt>row</tt>, or <tt>-1</tt> if there is none (<i>i.e.</i>, the row
+    contains only zero entries).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> firstNonZeroColInRow <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>col &lt; cols &amp;&amp; data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> == <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      col++;    
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>col == cols<SPAN STYLE="COLOR:#444444">)</SPAN> ? -<SPAN STYLE="COLOR:#33AA33">1</SPAN> : col;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the row index of the first non-zero entry in the given
+    <tt>col</tt>, or <tt>-1</tt> if there is none (<i>i.e.</i>, the
+    column contains only zero entries).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> firstNonZeroRowInColumn <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>row &lt; rows &amp;&amp; data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> == <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      row++;    
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>row == rows<SPAN STYLE="COLOR:#444444">)</SPAN> ? -<SPAN STYLE="COLOR:#33AA33">1</SPAN> : row;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the column index of the last non-zero entry in the given
+    <tt>row</tt>, or <tt>-1</tt> if there is none (<i>i.e.</i>, the row
+    contains only zero entries).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> lastNonZeroColInRow <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = cols-<SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>col &gt; <SPAN STYLE="COLOR:#33AA33">0</SPAN> &amp;&amp; data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> == <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      col--;    
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> col;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the row index of the last non-zero entry in the given
+    <tt>col</tt>, or <tt>-1</tt> if there is none (<i>i.e.</i>, the
+    column contains only zero entries).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> lastNonZeroRowInColumn <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = rows-<SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>while</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>row &gt; <SPAN STYLE="COLOR:#33AA33">0</SPAN> &amp;&amp; data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> == <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      row--;    
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> row;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="square" href="#contents">Square-Matrix Specific Methods</a></li></a>
+    </span></h4>
+    <p/>
+    Following are some methods concerning square matrices;
+    <i>i.e.</i>, or equal numbers of rows and columns.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff <tt>this</tt> <tt>Matrix</tt> is square.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isSquare <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>rows == cols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the trace of <tt>this</tt> (square) <tt>Matrix</tt>
+    (<i>i.e.</i>, the sum of all its diagonal entries).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> trace <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>!isSquare<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Can only compute trace of a non-square matrix"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> result = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i &lt; rows; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      result += data<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> result;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff this is a square diagonal matrix.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isDiagonal <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>!isSquare<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:GREEN">false</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    
+    <SPAN STYLE="COLOR:#88AA66"><EM>// need only sweep through the upper triangular part and check
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// whether either of each symmetric entries is non-zero
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows-<SPAN STYLE="COLOR:#33AA33">1</SPAN>; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">1</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> != <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN> || data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> != <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    If this is a square matrix, this returns <tt>this</tt> after
+    modifying its <tt>data</tt> array in place to its transpose.  If it
+    is not square, it throws a <tt>RuntimeException</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> i_transpose <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>!isSquare<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Cannot transpose a non-square matrix in place!"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// need only sweep through the upper triangular part and swap
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// symmetric non-equal entries (this is necessarily safe)
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows-<SPAN STYLE="COLOR:#33AA33">1</SPAN>; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">1</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> != data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> = safeDataUpdate<SPAN STYLE="COLOR:#444444">(</SPAN>row,col,data<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>this</STRONG></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="vectors" href="#contents">Vector-Specific Methods</a></li></a>
+    </span></h4>
+    <p/>
+    Following are some methods concerning one-dimensional matrices;
+    <i>i.e.</i>, (row or column) vectors.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff <tt>this</tt> is a one-dimensional
+    <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isVector <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> isRowVector<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> || isColVector<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff <tt>this</tt> is a one-row
+    <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isRowVector <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> rows == <SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff <tt>this</tt> is a one-colum
+    <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isColVector <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> cols == <SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="io" href="#contents">I/O Object Methods</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Prints this matrix to standard output printing each <tt>double</tt>
+    entry formatted using the default<a href="#floatformat">
+    <tt>floatFormat</tt> format string</a>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> show <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.out.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.out.printf<SPAN STYLE="COLOR:#444444">(</SPAN>floatFormatString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>,data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.out.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.out.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> showData <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    showDataArray<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h2 align="center"><span style="font-family:arial,helvetica;">
+    <a name="classmethods" href="#contents">Static Methods</a>
+    </span></h2>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> iff <tt>this.data</tt> and </tt>M.data</tt> are
+    entry-wise equal.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> equalData <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data1, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data2<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; data1.length; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; data1<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data1<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> != data2<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>double[][]</tt> that is the transpose of the given
+    array <tt>data</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> dataTranspose <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows = data.length;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols = data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> newData = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>cols<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rows<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	newData<SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN> = data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> newData;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> showDataArray <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; data.length; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:#444444">{</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.out.printf<SPAN STYLE="COLOR:#444444">(</SPAN>floatFormatString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>,data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+	<SPAN STYLE="COLOR:#4400DD"><STRONG>System</STRONG></SPAN>.out.println<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+      <SPAN STYLE="COLOR:#444444">}</SPAN>
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="useful" href="#contents">Useful Static Matrix Methods</a>
+    </span></h4>
+    <p/>
+   
+    The following are various (static) useful methods handy when using
+    <tt>Matrix</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new square <tt>Matrix</tt> of order <tt>order</tt> with all
+    entries <tt>0.0</tt>'s.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> newSquareMatrix <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>order<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return <tt>true</tt> if the given entry is assimilitated to zero
+    according to the current set precision.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> isZeroEntry <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> entry<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.abs<SPAN STYLE="COLOR:#444444">(</SPAN>entry<SPAN STYLE="COLOR:#444444">)</SPAN> &lt; currentPrecision<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new <tt>double[][]</tt> that is equal to the given array
+    <tt>data</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> copyData <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows = data.length;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols = data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length;
+
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> dataCopy = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rows<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>cols<SPAN STYLE="COLOR:#444444">]</SPAN>;	
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	dataCopy<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> dataCopy;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a new identity <tt>Matrix</tt> of order <tt>order</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> identity <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> id = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>order<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; i&lt; order; i++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      id<SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>i<SPAN STYLE="COLOR:#444444">]</SPAN> = <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+    
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>id<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="checks" href="#contents">Consistency Checking</a>
+    </span></h4>
+    <p/>
+   
+    The following are various (static) methods that are used in various
+    places to verify the consistency of various <tt>Matrix</tt>
+    parameters in a given context.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Verifies the compatibility of the given dimensions and throws an
+    <tt>IncompatibleMatrixDimensionException</tt> if it is violated.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> verifyCompatibleDimension <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> otherRows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> otherCols<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>rows != otherRows || cols != otherCols<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>IncompatibleMatrixDimensionException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols,otherRows,otherCols<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Throws a <tt>RuntimeException</tt> if there is no such entry at
+    indices (<tt>i</tt>,<tt>j</tt>) in this <tt>Matrix</tt>. <b>N.B.:</b>
+    Matrix indices are counted from <tt>1</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> checkLegalEntry <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> j<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    checkLegalIndex<SPAN STYLE="COLOR:#444444">(</SPAN>i,data.length<SPAN STYLE="COLOR:#444444">)</SPAN>;
+    checkLegalIndex<SPAN STYLE="COLOR:#444444">(</SPAN>j,data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Throws a <tt>RuntimeException</tt> if index <tt>i</tt> is not between
+    <tt>1</tt> and <tt>size</tt> inclusive. <b>N.B.:</b> Matrix indices are
+    counted from <tt>1</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> checkLegalIndex <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> i, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> size<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>i &lt; <SPAN STYLE="COLOR:#33AA33">1</SPAN> || i &gt; size<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN>
+	<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Matrix index "</EM></SPAN>+i+<SPAN STYLE="COLOR:#D2691E"><EM>" out of bounds [1,"</EM></SPAN>+size+<SPAN STYLE="COLOR:#D2691E"><EM>"]"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;    
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Throws a <tt>RuntimeException</tt> if any entry in the given
+    <tt>data</tt> array is not stochastic.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> checkForStochasticEntries <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; data.length; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	<SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &lt; <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN> || data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> &gt; <SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+	  <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN>
+	    <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Non-stochastic entry in data array at (row,col): ("</EM></SPAN>+row+<SPAN STYLE="COLOR:#D2691E"><EM>","</EM></SPAN>+col+<SPAN STYLE="COLOR:#D2691E"><EM>")"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>  
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="printing" href="#contents">Printing Control</a>
+    </span></h4>
+    <p/>
+   
+    The following are various (static) paraphernalia for the control of
+    printing the entries of a <tt>Matrix</tt> object.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <a name="printWidth"></a>Print width used to format
+    <tt>double</tt>s and <tt>double</tt>s using Java's <a
+    href="https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax"><tt>System.out.printf</tt>
+    format syntax</a>. In order to control the format of entries printed
+    by the <tt>show()</tt> method, redefine this string to the wished
+    format string.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> printWidth = <SPAN STYLE="COLOR:#33AA33">9</SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the <tt>printf</tt> width used for printing floating-point
+    numbers.  types.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> printWidth <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> printWidth;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Sets the format string to the specified <tt>width</tt>, which will
+    be the total print width used for printing floating-point numbers
+    with <tt>printf</tt>. This cannot be less that <tt>3</tt> (if so, it
+    is set to <tt>3</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> setPrintWidth <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> width<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// %[width].[precision]f
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> printWidth = <SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.max<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">3</SPAN>,width<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Resets to <tt>9</tt> the total print width for floating-point
+    numbers used in <tt>printf</tt> format string.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> resetPrintWidth <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> setPrintWidth<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">9</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the current <a name="floatformat">floating-point format
+    string</a> in effect for printing floating-point values using
+    <tt>printf</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> floatFormatString <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN>
+      <SPAN STYLE="COLOR:#D2691E"><EM>"%"</EM></SPAN> +
+      <SPAN STYLE="COLOR:#4400DD"><STRONG>Integer</STRONG></SPAN>.toString<SPAN STYLE="COLOR:#444444">(</SPAN>printWidth<SPAN STYLE="COLOR:#444444">)</SPAN> +
+      <SPAN STYLE="COLOR:#D2691E"><EM>"."</EM></SPAN> +
+      <SPAN STYLE="COLOR:#4400DD"><STRONG>Integer</STRONG></SPAN>.toString<SPAN STYLE="COLOR:#444444">(</SPAN>currentSignificantDigits<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> +
+      <SPAN STYLE="COLOR:#D2691E"><EM>"f"</EM></SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="precision" href="#contents">Precision Control</a>
+    </span></h4>
+    <p/>
+   
+    The following are various (static) paraphernalia for the control of
+    <tt>double</tt> precision when dealing with random values.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a <tt>double[rows][cols]</tt> with entries equal to random
+    values between <tt>0.0</tt> and <tt>1.0</tt> inclusive.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> randomDataArray <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rows<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>cols<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = randomValue<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> data;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return a <tt>double[rows][cols]</tt> with entries equal to random
+    values between <tt>0.0</tt> and <tt>scale</tt> inclusive.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> randomDataArray <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> scale<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data = <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>rows<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>cols<SPAN STYLE="COLOR:#444444">]</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; rows; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; cols; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = randomValue<SPAN STYLE="COLOR:#444444">(</SPAN>scale<SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> data;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <a name="bias">Toss a coin</a> and return either <tt>false</tt> or
+    <tt>true</tt>.  This can be biased by setting
+    <tt>COIN_TOSS_BIAS</tt> to any double between
+    <tt>[0.0,1.0]</tt>. The lower the bias makes coin tossing return
+    <tt>false</tt>; the higher, it makes it return <tt>true</tt>.  If
+    <tt>1</tt>, then coin-toss is always <tt>true</tt>.  If <tt>0</tt>,
+    then coin-toss is always <tt>false</tt>. The default is
+    <tt>COIN_TOSS_BIAS = 0.5</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>boolean</STRONG></SPAN> headsOrTail <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.random<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> &lt; <SPAN STYLE="COLOR:GREEN">COIN_TOSS_BIAS</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">true</SPAN>;
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">false</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The default <tt>COIN_TOSS_BIAS</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">COIN_TOSS_BIAS</SPAN> = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">5</SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the current toss-coin bias (a <tt>double</tt> in
+    <tt>[0.0,1.0]</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> bias <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">COIN_TOSS_BIAS</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Set the toss-coin bias to <tt>bias</tt>. The lower the bias makes
+    coin tossing return <tt>false</tt> more often; the higher, it makes
+    it return <tt>true</tt> more often.  If <tt>1</tt>, then coin-toss
+    is always <tt>true</tt>.  If <tt>0</tt>, then coin-toss is always
+    <tt>false</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> setBias <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> bias<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">COIN_TOSS_BIAS</SPAN> = <SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.max<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN>,<SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.min<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">1</SPAN>,bias<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Reset the toss-coin bias to <tt>0.5</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> resetBias <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">COIN_TOSS_BIAS</SPAN> = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">5</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the result of truncating <tt>value</tt> to the value obtained
+    by setting to <tt>0</tt> all its digits past the position indicated by
+    <tt>currentSignificantDigits()</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> truncate <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> value<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> value; <SPAN STYLE="COLOR:#88AA66"><EM>// NO OP UNTIL I FIGURE OUT HOW TO CONTROL THIS DAMN THING!
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// double scale = Math.pow(10,currentSignificantDigits());
+</EM></SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// return Math.floor(value*scale)/scale; // this means always &lt;= value!
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// //    return round(Math.floor(value*scale)/scale); // see below
+</EM></SPAN>  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Do the same kind of rounding that we do for values that are too close
+    (within current threshold <tt>&theta;</tt>) of <tt>0.0</tt> or
+    <tt>1.0</tt>, but to any <tt>value</tt> in
+    <tt>[&theta;,1-&theta;]</tt> closest (within current threshold
+    <tt>&theta;</tt>).
+
+    <i>e.g.</i>: if threshold <tt>&theta; = 0.01</tt> and <tt>digits =
+    3</tt> (<i>i.e.</i>, <tt>precision = 0.001</tt>), the <tt>double</tt>
+    value <tt>0.123456</tt> is rounded downwards to <tt>0.123</tt> because:
+    ...
+    <p/><b>N.B.:</b> this not well defined unless we justify why
+    we round to the closest value at a precision equal to
+    <tt>10&times;precision</tt>!
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> round <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> value<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN> <SPAN STYLE="COLOR:#88AA66"><EM>// finish later; does nothing and return argument for now
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> value;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the given array <tt>data</tt> after of truncating all its
+    entries by setting to <tt>0</tt> all its digits past the position
+    indicated by <tt>currentSignificantDigits()</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> truncate <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN> data<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>data == <SPAN STYLE="COLOR:GREEN">null</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>throw</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>RuntimeException</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Vacuous data array"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> row = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; row &lt; data.length; row++<SPAN STYLE="COLOR:#444444">)</SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>for</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> col = <SPAN STYLE="COLOR:#33AA33">0</SPAN>; col &lt; data<SPAN STYLE="COLOR:#444444">[</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">]</SPAN>.length; col++<SPAN STYLE="COLOR:#444444">)</SPAN>
+	data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN> = truncate<SPAN STYLE="COLOR:#444444">(</SPAN>data<SPAN STYLE="COLOR:#444444">[</SPAN>row<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">[</SPAN>col<SPAN STYLE="COLOR:#444444">]</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> data;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The greatest number of significant decimal digits accepted for a
+    matrix entries. It is set by default to <tt>5</tt> decimal places.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">MAX_SIGNIFICANT_DIGITS</SPAN> = <SPAN STYLE="COLOR:#33AA33">5</SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The method <tt>maxSignificantDigits()</tt> return the currently
+    effective number of significant decimal digits after the dot that are
+    taken into account.<p/>
+
+    <b>N.B.:</b> <tt>maxSignificantDigits()</tt> is the next integer
+    higher than <tt>-log<sub>10</sub>(<a
+    href="#currentPrecision">currentPrecision())</a></tt>; <i>i.e.</i>, in
+    Java:
+
+    <pre>
+    maxSignificantDigits() == -Math.ceil(Math.log10(currentPrecision()))</pre>
+
+    For example, if <tt>currentPrecision() = 0.0001</tt>, then
+    <tt>log<sub>10</sub>currentPrecision() = -4</tt>, <i>i.e.</i>,
+    <tt>maxSignificantDigits() = 4</tt>.<p/>
+
+    To keep all this inter-dependencies this consistent, the maximum
+    number of significant digits is the only constant that can be reset
+    and all others are computed from it.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> maxSignificantDigits <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">MAX_SIGNIFICANT_DIGITS</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The method <tt>setMaxSignificantDigits()</tt> sets the maximum number
+    of significant decimal digits after the dot that are taken into
+    account to the maximum of <tt>1</tt> and <tt>digits</tt> and return
+    it.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> setMaxSignificantDigits <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> digits<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">MAX_SIGNIFICANT_DIGITS</SPAN> = <SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.max<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">1</SPAN>,digits<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    How many significant decimal digits are currently taken into account
+    for matrix entries (all digits after this one are <tt>0</tt>). This
+    defaults to <tt>1</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">CURRENT_SIGNIFICANT_DIGITS</SPAN> = <SPAN STYLE="COLOR:#33AA33">1</SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the current number of significant of decimal digits after the
+    dot that are taken into account.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> currentSignificantDigits <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">CURRENT_SIGNIFICANT_DIGITS</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The method <tt>setCurrentSignificantDigits(int)</tt> sets the current
+    number of significant decimal digits dot to the given <tt>int</tt> if
+    it is between <tt>1</tt> and <tt>maxSignificantDigits()</tt>, or
+    whichever of these that is closest otherwise, and return it.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> setCurrentSignificantDigits <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> digits<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">CURRENT_SIGNIFICANT_DIGITS</SPAN> = <SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.min<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.max<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">1</SPAN>,digits<SPAN STYLE="COLOR:#444444">)</SPAN>,maxSignificantDigits<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The method <tt><a name="currentPrecision">currentPrecision()</a></tt>
+    return the precision currently in effect. <p/>
+
+    <b>N.B.:</b> It is always equal to
+    <tt>10<sup>-currentSignificantDigits()</sup></tt>; <i>i.e.</i>, in
+    Java, <tt>Math.pow(10,-d)</tt>.
+
+    For example, if <tt>currentSignificantDigits() = 3</tt>, then
+    <tt>currentPrecision() = 0.001</tt>.
+
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> currentPrecision <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.pow<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">10</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>,-<SPAN STYLE="COLOR:GREEN">CURRENT_SIGNIFICANT_DIGITS</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="random" href="#contents">Random-Number Generation Control</a>
+    </span></h4>
+    <p/>
+   
+    The following are various (static) paraphernalia for the control of
+    how close to <tt>0.0</tt> or <tt>1.0</tt> some random values
+    generated by the <a href="#randomValue"><tt>randomValue()</tt></a>
+    method should be rounded downwards to <tt>0.0</tt> or upwards to
+    <tt>1.0</tt> according a coin toss. (See the methods that <a
+    href="#bias">control coin-toss bias</a>.)
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is a value in <tt>[0.0,1.0]</tt> used as approximation threshold
+    to <tt>0.0</tt> if too close; defaults to <tt>0.0</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">THRESHOLD0</SPAN> = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the threshold for random rounding approximation to
+    <tt>0.0</tt> currently in effect.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> threshold0 <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">THRESHOLD0</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    This is a value in <tt>[0.0,1.0]</tt> used as approximation threshold
+    to <tt>1.0</tt> if too close; defaults to <tt>0.0</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">THRESHOLD1</SPAN> = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Return the threshold for random rounding approximation to
+    <tt>1.0</tt> currently in effect.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>final</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> threshold1 <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">THRESHOLD1</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Sets the current approximation threshold to <tt>0.0</tt> to the given
+    <tt>double</tt> in <tt>[0.0,1.0]</tt> used as approximation
+    threshold to round downwards to <tt>0.0</tt> if too close.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> setThreshold0 <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> threshold<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">THRESHOLD0</SPAN> = <SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.min<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.max<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>,threshold<SPAN STYLE="COLOR:#444444">)</SPAN>,<SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>  
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Resets the current approximation threshold to <tt>0.0</tt> its
+    default value (<tt>0.0</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> resetThreshold0 <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">THRESHOLD0</SPAN> = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>  
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Sets the current approximation threshold to <tt>1.0</tt> to the
+    given <tt>double</tt> in <tt>[0.0,1.0]</tt> used as approximation
+    threshold to round upwards to <tt>1.0</tt> if too close.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> setThreshold1 <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> threshold<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">THRESHOLD1</SPAN> = <SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.min<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.max<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>,threshold<SPAN STYLE="COLOR:#444444">)</SPAN>,<SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Resets the current approximation threshold to <tt>1.0</tt> to its
+    default value (<tt>0.0</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> resetThreshold1 <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:GREEN">THRESHOLD1</SPAN> = <SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>  
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Resets the current approximation thresholds to <tt>0.0</tt> and <tt>1</tt> to their
+    default value (<tt>0.0</tt>).
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> resetThresholds <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    resetThreshold0<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    resetThreshold1<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>  
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The static method <a name="randomValue"><tt>randomValue()</tt></a>
+    return a random <tt>double</tt> picked in the <i>closed</i>
+    interval <tt>[0.0,1.0]</tt> (<i>i.e.</i>, including <tt>0.0</tt>
+    and <tt>1.0</tt>), modulo the currently effective number of decimal
+    digits and precision. The <tt>int</tt> <tt>digits</tt> (=
+    <tt>1</tt>, <tt>2</tt>, <i>etc,</i>...) is how many decimal digits
+    after the decimal point <tt>double</tt>s are approximated.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>protected</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> randomValue <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#88AA66"><EM>// pick a random double in [0.0,1.0)
+</EM></SPAN>    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> picked = truncate<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>Math</STRONG></SPAN>.random<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:#88AA66"><EM>// the above return a double in [0.0,1.0): it does not include 1.0
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// or may me too small to be worth distinguishing from 0.0; so
+</EM></SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>// we round it to either 0.0 or 1.0 if too close to either
+</EM></SPAN>    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> threshold0 = threshold0<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> threshold1 = threshold1<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN>picked &lt; threshold0<SPAN STYLE="COLOR:#444444">)</SPAN>        <SPAN STYLE="COLOR:#88AA66"><EM>/* when picked is too close to 0.0 according to threshold0 */</EM></SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN>
+        headsOrTail<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> ? picked :    <SPAN STYLE="COLOR:#88AA66"><EM>/* toss a coin and return either what was picked or        */</EM></SPAN>
+	<SPAN STYLE="COLOR:#33AA33">0</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;                        <SPAN STYLE="COLOR:#88AA66"><EM>/* return 0.0 (round downwards)                            */</EM></SPAN>
+
+    <SPAN STYLE="COLOR:BROWN"><STRONG>if</STRONG></SPAN> <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#33AA33">1</SPAN>-picked<SPAN STYLE="COLOR:#444444">)</SPAN> &lt; threshold1<SPAN STYLE="COLOR:#444444">)</SPAN>    <SPAN STYLE="COLOR:#88AA66"><EM>/* when picked is too close to 1.0 according to threshold1 */</EM></SPAN>
+      <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN>
+        headsOrTail<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> ? picked :    <SPAN STYLE="COLOR:#88AA66"><EM>/* toss a coin and return either what was picked or        */</EM></SPAN>
+	<SPAN STYLE="COLOR:#33AA33">1</SPAN>.<SPAN STYLE="COLOR:#33AA33">0</SPAN>;                        <SPAN STYLE="COLOR:#88AA66"><EM>/* return 1.0 (round upwards)                              */</EM></SPAN>
+
+    <SPAN STYLE="COLOR:#88AA66"><EM>// otherwise return picked as is
+</EM></SPAN>    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> picked;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Show the random-number generation and doubleing-point precision
+    control parameters currently in effect.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> showParameters <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    ln<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"--------------------------------------------------------------------"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"Matrix class parameter settings:"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN> ;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"--------------------------------------------------------------------"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"    current number algebra = "</EM></SPAN>+<SPAN STYLE="COLOR:#4400DD"><STRONG>NumberAlgebra</STRONG></SPAN>.getCurrentAlgebra<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    jot<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"    significant number of digits = "</EM></SPAN>+currentSignificantDigits<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>" (i.e., precision = "</EM></SPAN>+currentPrecision<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>+<SPAN STYLE="COLOR:#D2691E"><EM>")"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    jot<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"    floating-point print width = "</EM></SPAN>+printWidth<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>" (i.e., format string = "</EM></SPAN>+floatFormatString<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>+<SPAN STYLE="COLOR:#D2691E"><EM>")"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"    random number generation parameters:"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"    \tthreshold to 0.0 = "</EM></SPAN>+threshold0<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"    \tthreshold to 1.0 = "</EM></SPAN>+threshold1<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"    \tcoin-toss bias   = "</EM></SPAN>+bias<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+    say<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#D2691E"><EM>"--------------------------------------------------------------------"</EM></SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    The static method <tt>randomValue(double scale)</tt></a> return a
+    random <tt>double</tt> picked in the <i>closed</i> interval
+    <tt>[0.0,scale]</tt> if <tt>scale</tt> is positive, or
+    <tt>[scale,0.0]</tt> if <tt>scale</tt> is negative, modulo the
+    currently effective number of decimal digits and precision.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>private</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> randomValue <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> scale<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> truncate<SPAN STYLE="COLOR:#444444">(</SPAN>scale*randomValue<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create and return a random square matrix of order <tt>order</tt> with
+    entries in <tt>[0.0,1.0]</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> randomSquare <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> random<SPAN STYLE="COLOR:#444444">(</SPAN>order,order<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create and return a random square matrix of order <tt>order</tt> with
+    entries in <tt>[0.0,1.0]</tt> scaled by a factor <tt>scale</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> randomSquare <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> order, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> scale<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> random<SPAN STYLE="COLOR:#444444">(</SPAN>order,order,scale<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create and return a random <tt>rows</tt>-by-<tt>cols</tt> matrix with
+    entries in <tt>[0.0,1.0]</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> random <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.setData<SPAN STYLE="COLOR:#444444">(</SPAN>randomDataArray<SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Create and return a random <tt>rows</tt>-by-<tt>cols</tt> matrix with
+    entries in <tt>[0.0,scale]</tt>.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN> random <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> rows, <SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> cols, <SPAN STYLE="COLOR:BLUE"><STRONG>double</STRONG></SPAN> scale<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:BROWN"><STRONG>return</STRONG></SPAN> <SPAN STYLE="COLOR:BROWN"><STRONG>new</STRONG></SPAN> <SPAN STYLE="COLOR:#4400DD"><STRONG>Matrix</STRONG></SPAN><SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>.setData<SPAN STYLE="COLOR:#444444">(</SPAN>randomDataArray<SPAN STYLE="COLOR:#444444">(</SPAN>rows,cols,scale<SPAN STYLE="COLOR:#444444">)</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    <h4 align="center"><span style="font-family:arial,helvetica;">
+    <a name="miscio" href="#contents">Miscellaneous Static I/O tools</a>
+    </span></h4>
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Print an empty line on the standard output.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> ln <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Misc</STRONG></SPAN>.ln<SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Print <tt>n</tt> empty lines on the standard output.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> ln <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:BLUE"><STRONG>int</STRONG></SPAN> n<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Misc</STRONG></SPAN>.ln<SPAN STYLE="COLOR:#444444">(</SPAN>n<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Print a line not ending in a CR on the standard output.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> jot <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> what<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Misc</STRONG></SPAN>.jot<SPAN STYLE="COLOR:#444444">(</SPAN>what<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Print a line ending in a CR on the standard output.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> say <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> what<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Misc</STRONG></SPAN>.say<SPAN STYLE="COLOR:#444444">(</SPAN>what<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+  </PRE>
+<HR>
+<CENTER>
+<TABLE BGCOLOR="WHITE" WIDTH=90% BORDER=1 CELLPADDING=10>
+<TR><TD><SPAN STYLE="COLOR:BLACK">
+
+    Print a line ending in a CR and skip a line on the standard output.
+   
+</SPAN></TD></TR>
+</TABLE>
+</CENTER>
+<P>
+<PRE>
+  <SPAN STYLE="COLOR:PURPLE"><STRONG>static</STRONG></SPAN> <SPAN STYLE="COLOR:PURPLE"><STRONG>public</STRONG></SPAN> <SPAN STYLE="COLOR:BLUE"><STRONG>void</STRONG></SPAN> sln <SPAN STYLE="COLOR:#444444">(</SPAN><SPAN STYLE="COLOR:#4400DD"><STRONG>String</STRONG></SPAN> what<SPAN STYLE="COLOR:#444444">)</SPAN>
+  <SPAN STYLE="COLOR:#444444">{</SPAN>
+    <SPAN STYLE="COLOR:#4400DD"><STRONG>Misc</STRONG></SPAN>.sln<SPAN STYLE="COLOR:#444444">(</SPAN>what<SPAN STYLE="COLOR:#444444">)</SPAN>;
+  <SPAN STYLE="COLOR:#444444">}</SPAN>
+
+
+<SPAN STYLE="COLOR:#444444">}</SPAN>
+
+</PRE>
+<P>
+<HR>
+<P ALIGN="RIGHT"><SPAN STYLE="COLOR:#F07070"><EM>
+This file was generated on Wed Dec 18 03:37:41 PST 2019 from file <SPAN STYLE="COLOR:BROWN"><KBD>Matrix.java</KBD></SPAN><BR>by the <SPAN STYLE="COLOR:BROWN"><KBD>hlt.language.tools.Hilite</KBD></SPAN> Java tool written by <A HREF="http://hassan-ait-kaci.net">Hassan A&iuml;t-Kaci</A></EM></SPAN>
+<P>
+<HR>
+</BODY>
+</HTML>
